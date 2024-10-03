@@ -2,7 +2,8 @@ package com.example.test2
 
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.enableEdgeToEdge
+import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -10,24 +11,42 @@ import com.google.firebase.ktx.Firebase
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        setContentView(R.layout.activity_main)
 
-        // Получаем экземпляр Firestore
         val db = Firebase.firestore
+        val btn = findViewById<Button>(R.id.btn)
+        val tw = findViewById<TextView>(R.id.tw)
 
-        // Записываем данные в коллекцию "hi"
-        db.collection("hi").document().set(mapOf("Name" to "MyBook"))
+        val list = mutableListOf<Book>()
 
-        // Чтение всех документов из коллекции "hi"
+        db.collection("hi").document().set(
+            Book(
+                "MyBook",
+                "About...",
+                "12",
+                "Fantasy",
+                "URL"
+            )
+        )
+
+
         db.collection("hi")
             .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    Log.d("MainActivity", "${document.id} => ${document.data}")
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    list.addAll(task.result.toObjects(Book::class.java))
+                    Log.d("Firestore", "Data: $list")
+                    for (book in list) {
+                        val cur = tw.text
+                        tw.text = cur + {book.name}.toString()
+                    }
+                } else {
+                    Log.w("Firestore", "Error getting documents.", task.exception)
                 }
             }
-            .addOnFailureListener { exception ->
-                Log.w("MainActivity", "Error getting documents: ", exception)
-            }
     }
+}
+
+private operator fun CharSequence.plus(toString: String): CharSequence? {
+return CharSequence + toString
 }
