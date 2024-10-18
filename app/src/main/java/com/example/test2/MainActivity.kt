@@ -14,8 +14,7 @@
             setContentView(R.layout.activity_main)
 
             val db = Firebase.firestore
-            val btn = findViewById<Button>(R.id.btn)
-            val tw = findViewById<TextView>(R.id.tw)
+
 
             val list = mutableListOf<Book>()
 
@@ -38,7 +37,7 @@
                         Log.d("Firestore", "Data: $list")
                         for (book in list) {
                             Log.d("Str", book.name)
-                            tw.text = tw.text + book.name
+                           // tw.text = tw.text.toString() + book.name
                         }
                     } else {
                         Log.w("Firestore", "Error getting documents.", task.exception)
