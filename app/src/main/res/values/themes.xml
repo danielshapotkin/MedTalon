@@ -2,8 +2,22 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Test2" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@android:color/white</item> <!-- Белый цвет для основной темы -->
+        <item name="colorAccent">@color/orange</item> <!-- Оранжевый цвет для акцентов -->
     </style>
 
     <style name="Theme.Test2" parent="Base.Theme.Test2" />
+
+    <style name="orangeButton" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/orange</item>
+        <item name="background">@drawable/orange_button_background</item>
+    </style>
+
+    <style name="whiteButton" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@android:color/transparent</item>
+        <item name="background">@drawable/orange_button_background</item>
+        <item name="android:textColor">@color/orange</item>
+    </style>
+
+
 </resources>
