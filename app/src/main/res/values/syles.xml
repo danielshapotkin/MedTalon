@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="HintTextStyle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColorHint">#808080</item> <!-- Настройка цвета для хинта -->
+    </style>
+
+</resources>
