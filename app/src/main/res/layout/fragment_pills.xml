@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <LinearLayout
+        android:id="@+id/parent_linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Button
+                android:id="@+id/region_button"
+                android:layout_width="140dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:background="@android:color/transparent"
+                android:drawableLeft="@drawable/map_icon"
+                android:padding="5dp"
+                android:text="Вся Беларусь"
+                android:textColor="@color/orange"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/profile_button"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:background="@android:color/transparent"
+                android:drawableLeft="@drawable/profile_icon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:id="@+id/header_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="Лекартсва"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/search_editText"
+                android:layout_width="363dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="2dp"
+                android:height="40dp"
+                android:background="@drawable/solid_and_stroke"
+                android:hint="Найдем лекарство"
+                android:paddingStart="12dp"
+                android:textAppearance="@style/HintTextStyle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/search_button"
+                style="@style/orangeButton"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/solid_and_stroke"
+                android:drawableLeft="@drawable/search_icon"
+                android:padding="10dp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/search_editText"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageView
+                android:id="@+id/medical_imageView"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="32dp"
+                android:src="@drawable/medical_services_icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/search_editText" />
+
+            <ImageView
+                android:id="@+id/institutions_imageView"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="92dp"
+                android:src="@drawable/pills_icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/search_editText" />
+
+            <TextView
+                android:id="@+id/choiceAnalysis_textView"
+                android:layout_width="118dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="40dp"
+                android:text="Аптеки"
+                app:layout_constraintStart_toEndOf="@+id/medical_imageView"
+                app:layout_constraintTop_toBottomOf="@+id/search_editText" />
+
+            <TextView
+                android:id="@+id/institutions_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="40dp"
+                android:text="Справочник лекарств"
+                app:layout_constraintStart_toEndOf="@+id/institutions_imageView"
+                app:layout_constraintTop_toBottomOf="@+id/choiceAnalysis_textView" />
+
+            <ImageView
+                android:id="@+id/choiceAnalysis_button"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="190dp"
+                android:layout_marginTop="40dp"
+                android:src="@drawable/arrow_icon"
+                app:layout_constraintStart_toEndOf="@+id/choiceAnalysis_textView"
+                app:layout_constraintTop_toBottomOf="@+id/search_button" />
+
+            <ImageView
+                android:id="@+id/myAnalysis_button"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="190dp"
+                android:layout_marginTop="96dp"
+                android:src="@drawable/arrow_icon"
+                app:layout_constraintStart_toEndOf="@+id/choiceAnalysis_textView"
+                app:layout_constraintTop_toBottomOf="@+id/search_button" />
+
+            <View
+                android:id="@+id/line_view"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#000000"
+                app:layout_constraintBottom_toTopOf="@+id/institutions_textview"
+                app:layout_constraintTop_toBottomOf="@+id/choiceAnalysis_textView"
+            />
+
+            <TextView
+                android:id="@+id/blog_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="48dp"
+                android:text="Медицинский блог"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/institutions_textview" />
+
+            <LinearLayout
+                android:id="@+id/news_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/card_background"
+                android:elevation="4dp"
+                android:orientation="vertical"
+                android:padding="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/blog_textview"
+                app:layout_constraintVertical_bias="0.158"
+               >
+
+                <TextView
+                    android:id="@+id/snore_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="Чем опасен храп и как от него избавиться?"
+                    android:textColor="@color/blue"
+                    android:textSize="16sp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:textStyle="italic"
+                    android:text="Анастасия Шунто       👁5516"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/eyesInfo_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="Круги и мешки под глазами: почему возникают и как убрать?"
+                    android:textColor="@color/blue"
+                    android:textSize="16sp"
+                    />
+                />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="Катерина Киселева        👁3986"
+                    android:textSize="14sp"
+                    android:textStyle="italic"/>
+
+
+            </LinearLayout>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/region_all"
+        android:title="Вся Беларусь" />
+    <item
+        android:id="@+id/region_minsk"
+        android:title="Минск" />
+    <item
+        android:id="@+id/region_brest"
+        android:title="Брест" />
+    <item
+        android:id="@+id/region_grodno"
+        android:title="Гродно" />
+    <item
+        android:id="@+id/region_vitebsk"
+        android:title="Витебск" />
+    <item
+        android:id="@+id/region_gonel"
+        android:title="Гомель" />
+    <item
+        android:id="@+id/region_mogilev"
+        android:title="Могилев" />
+
+</menu>

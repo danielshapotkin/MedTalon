@@ -1,82 +1,80 @@
-    package com.example.medtalon.presentation
+package com.example.medtalon.presentation
 
-    import android.os.Bundle
-    import android.util.Log
-    import androidx.appcompat.app.AppCompatActivity
-    import com.example.medtalon.domain.Doctor
-    import com.example.test2.R
-    import com.example.test2.databinding.ActivityMainBinding
-    import com.google.firebase.firestore.ktx.firestore
-    import com.google.firebase.ktx.Firebase
-    import com.google.firebase.storage.ktx.storage
+import android.content.Intent
+import android.os.Bundle
+import android.widget.PopupMenu
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.example.medtalon.presentation.HomeViewModel.Events
+import com.example.test2.R
+import com.example.test2.databinding.ActivityMainBinding
+import com.example.test2.databinding.FragmentHomeBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 
-    class MainActivity : AppCompatActivity() {
-        private val fs = Firebase.firestore
-        private val storage = Firebase.storage.reference
-        private lateinit var binding: ActivityMainBinding
+class MainActivity : AppCompatActivity() {
+    private lateinit var mainBinding: ActivityMainBinding
+    private lateinit var homeBinding: FragmentHomeBinding
+    private lateinit var bottomNavigation: BottomNavigationView
+    private val fs = Firebase.firestore
+    private val storage = Firebase.storage.reference
+    private val _events = MutableLiveData<Events>()
+    val events: LiveData<Events> get() = _events
 
 
-        override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-            binding = ActivityMainBinding.inflate(layoutInflater)
-            setContentView(binding.root)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mainBinding = ActivityMainBinding.inflate(layoutInflater)
+        homeBinding = FragmentHomeBinding.inflate(layoutInflater)
+        setContentView(mainBinding.root)
 
 
 
 
-
-            binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
-                when (item.itemId) {
-                    R.id.navigation_home -> {
-                        // Обработка нажатия на Home
-                        true
-                    }
-                    R.id.navigation_analysis -> {
-                        // Обработка нажатия на Search
-                        true
-                    }
-                    R.id.navigation_pills -> {
-                        // Обработка нажатия на Profile
-                        true
-                    }
-                    R.id.navigation_blog -> {
-                        // Обработка нажатия на Profile
-                        true
-                    }
-                    else -> false
+        bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigation.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.navigation_home -> {
+                    val homeFragment = HomeFragment()
+                    replaceFragment(homeFragment)
+                    true
                 }
+
+                R.id.navigation_analysis -> {
+                    val analysisFragment = AnalysisFragment()
+                    replaceFragment(analysisFragment)
+                    true
+                }
+
+                R.id.navigation_pills -> {
+                    val pillsFragment = PillsFragment()
+                    replaceFragment(pillsFragment)
+                    true
+                }
+
+                R.id.navigation_blog -> {
+                    val blogFragment = BlogFragment()
+                    replaceFragment(blogFragment)
+                    true
+                }
+
+                else -> false
             }
-
-
-
-
-
-
-
-
-            val list = mutableListOf<Doctor>()
-            fs.collection("Doctors").document().set(
-                Doctor(
-                    "Daniel",
-                    "Pavlovich",
-                    "Shapotkin",
-                    "Dantist"
-                )
-            )
-
-
-            fs.collection("Doctors")
-                .get()
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        list.addAll(task.result.toObjects(Doctor::class.java))
-                        for (doctor in list) {
-                            binding
-                        }
-                    } else {
-                        Log.w("Firestore", "Error getting documents.", task.exception)
-                    }
-                }
         }
+        bottomNavigation.selectedItemId = R.id.navigation_home
+
+
     }
+
+    private fun replaceFragment(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment_container, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+}
 
