@@ -6,6 +6,7 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.medtalon.App
+import com.example.medtalon.data.Auth
 
 class HomeViewModel private constructor() {
 
@@ -13,9 +14,9 @@ class HomeViewModel private constructor() {
         private set  // Закрываем возможность изменения извне
     private val _states = MutableLiveData(States("", false))
     private val _events = MutableLiveData<Events>()
-
     val states: LiveData<States> get() = _states
     val events: LiveData<Events> get() = _events
+    private val auth: Auth = Auth()
 
     init {
         val sharedPrefs = App.context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
@@ -50,13 +51,21 @@ class HomeViewModel private constructor() {
         if (!isLogin) {
             _events.value = Events.Login
         } else {
-            Log.d("EventsProfile", "EventsProfile")
             _events.value = Events.Profile
         }
         _events.value = null
     }
 
-    fun login() {
+    fun register(email: String, password: String, onComplete: (Boolean, String?) -> Unit){
+auth.registerUser(email, password) { isSuccess, message->
+        message?.let { Log.d("MyLogs", it) }
+}
+    }
+
+    fun login(email: String, password: String) {
+auth.loginUser(email, password) {isSuccess, message->
+        message?.let { Log.d("MyLogs", it) }
+}
         isLogin = true
         saveLoginState(true)
     }

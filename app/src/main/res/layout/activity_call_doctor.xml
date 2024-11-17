@@ -59,7 +59,7 @@
         app:layout_constraintTop_toBottomOf="@+id/top_bar" />
 
     <TextView
-        android:id="@+id/show_more_text"
+        android:id="@+id/show_more_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -80,7 +80,7 @@
         android:text="г. Минск, ул. Кунцевщина 8 \n\nРегистратура/вызов врача: +375 17 379-85-65\n\nПН-ПТ: 7:00-20:00\nСБ: 8:30-18:00"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/show_more_text" />
+        app:layout_constraintTop_toBottomOf="@+id/show_more_info" />
 
     <TextView
         android:id="@+id/hidden_email_textview"

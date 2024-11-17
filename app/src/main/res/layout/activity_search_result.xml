@@ -53,21 +53,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/top_bar" />
 
+    <!-- Поле для выбора даты -->
     <TextView
         android:id="@+id/searchResults_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:clickable="true"
         android:focusable="true"
-        android:text="Результат"
-        android:textSize="10sp"
         android:textColor="@color/text_color_selector"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <!-- Поле для выбора даты -->
     <TextView
         android:id="@+id/date_label"
         android:layout_width="wrap_content"

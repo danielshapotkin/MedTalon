@@ -6,27 +6,48 @@ import android.app.TimePickerDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuInflater
 import android.widget.PopupMenu
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import com.example.medtalon.data.DataBase
+import com.example.medtalon.data.Repository
+import com.example.medtalon.domain.IRepository
 import com.example.test2.R
 import com.example.test2.databinding.ActivityCallDoctorBinding
 import com.example.test2.databinding.ActivityGetTalonBinding
 import com.example.test2.databinding.ActivitySearchResultBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.Calendar
 
+@Suppress("NAME_SHADOWING")
 class SearchResultActivity : AppCompatActivity(
 
 ) {
 
     private lateinit var binding: ActivitySearchResultBinding
     private val homeViewModel: HomeViewModel = HomeViewModel.getInstance()
-
+    private val repository: IRepository = Repository.getInstance(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val doctorName = intent.getStringExtra("DOCTOR_NAME")
+        lifecycleScope.launch {
+            if (doctorName != null) {
+                val result = withContext(Dispatchers.IO) {
+                    repository.searchDoctor(doctorName)
+                }
+                binding.searchResultsTextView.text = result
+            }
+        }
 
         binding.backButton.setOnClickListener {
             finish()
@@ -42,11 +63,13 @@ class SearchResultActivity : AppCompatActivity(
                         homeViewModel.showProfile()
                         true
                     }
+
                     R.id.logout -> {
                         homeViewModel.logout()
                         finish()
                         true
                     }
+
                     else -> false
                 }
             }
@@ -64,7 +87,8 @@ class SearchResultActivity : AppCompatActivity(
                 { _, year, monthOfYear, dayOfMonth ->
                     val selectedDate = "$dayOfMonth/${monthOfYear + 1}/$year"
                     binding.selectedDate.text = selectedDate
-                }, year, month, day)
+                }, year, month, day
+            )
             datePickerDialog.show()
         }
 
@@ -80,15 +104,40 @@ class SearchResultActivity : AppCompatActivity(
             timePickerDialog.show()
         }
 
-        binding.makeAnAppointmentButton.setOnClickListener{
-            val doctor = binding.searchResultsTextView.text
-            val time = binding.selectedTime
-            val date = binding.selectedDate
+        binding.makeAnAppointmentButton.setOnClickListener {
+            val doctor = binding.searchResultsTextView.text.toString()
+            val time = binding.selectedTime.text.toString()
+            val date = binding.selectedDate.text.toString()
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Заказ талона")
+            builder.setMessage("Вы записаны на прием $date в $time \n Варач $doctor")
+            builder.setPositiveButton("OK") { dialog, _ ->
+                CoroutineScope(Dispatchers.IO).launch {
+                    repository.setTalon(
+                        date = date,
+                        doctor = doctor,
+                        polyclinic = "",
+                        time = time
+                    ) { success, message ->
+                        if (success) {
+                            println("Талон успешно добавлен!")
+                        } else {
+                            println("Ошибка при добавлении талона: $message")
+                        }
+                    }
+                }
+                dialog.dismiss()
+                finish()
+            }
+            builder.setNegativeButton("Отмена") { dialog, _ ->
+                dialog.dismiss()
+            }
+
+            // Показать диалог
+            val dialog = builder.create()
+            dialog.show()
         }
 
-        val searchResults = intent.getStringArrayListExtra("SEARCH_RESULTS")
-        binding.searchResultsTextView.text =
-            searchResults?.get(0) ?: "Услуги, врача или учреждения не найдено"
 
     }
 }

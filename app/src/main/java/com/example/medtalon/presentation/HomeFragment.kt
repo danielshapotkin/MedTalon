@@ -75,8 +75,6 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-
-
     private fun searchDataList(query: String): List<String> {
         return dataList.filter { it.contains(query, ignoreCase = true) }
     }
@@ -85,10 +83,10 @@ class HomeFragment : Fragment() {
         event?.let {
             when (it) {
                 is Events.Login -> {
-                    Log.d("Login", "Called login")
                     val intent = Intent(requireContext(), LoginActivity::class.java)
                     startActivity(intent)
                 }
+
                 is Events.Regions -> {
                     val popupMenu = PopupMenu(requireContext(), binding.regionButton)
                     popupMenu.menuInflater.inflate(R.menu.region_menu, popupMenu.menu)
@@ -98,30 +96,34 @@ class HomeFragment : Fragment() {
                     }
                     popupMenu.show()
                 }
+
                 Events.Talon -> {
                     val intent = Intent(requireContext(), GetTalonActivity::class.java)
                     startActivity(intent)
                 }
+
                 Events.Doctor -> {
                     val intent = Intent(requireContext(), CallDoctorActivity::class.java)
                     startActivity(intent)
                 }
-                Events.MedicalInstitutions -> TODO()
+
+                Events.MedicalInstitutions -> {
+                    val intent = Intent(requireContext(), MedicalInstitutionsActivity::class.java)
+                    startActivity(intent)
+                }
                 Events.PayServices -> TODO()
+
                 Events.Search -> {
                     val query = binding.searchEditText.text.toString()
-                    val searchResults = searchDataList(query)
-
                     val intent = Intent(requireContext(), SearchResultActivity::class.java).apply {
-                        putStringArrayListExtra("SEARCH_RESULTS", ArrayList(searchResults))
+                        putExtra("DOCTOR_NAME", query)
                     }
                     startActivity(intent)
                 }
+
                 Events.Profile -> {
                     val bottomSheetDialog = BottomSheetDialog(requireContext())
-                    Log.d("Inflate profile", "Inflate profile")
                     val view = layoutInflater.inflate(R.layout.bottom_sheet_layout, null)
-
                     view.findViewById<Button>(R.id.view_profile_button).setOnClickListener {
                         val intent = Intent(requireContext(), ProfileActivity::class.java)
                         startActivity(intent)
@@ -145,7 +147,6 @@ class HomeFragment : Fragment() {
             }
         }
     }
-
 
 
 }

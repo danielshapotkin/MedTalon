@@ -6,11 +6,9 @@ data class Polyclinic(
     val workTime: String,
     val email: String,
     val adress: String,
-    val url: String,
-    val img: String
+    val url: String
 ) {
     constructor() : this(
-        "",
         "",
         "",
         "",

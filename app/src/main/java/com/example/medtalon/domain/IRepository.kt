@@ -1,6 +1,6 @@
 package com.example.medtalon.domain
 
 interface IRepository {
-    suspend fun getToken(authCode: String): String
-    suspend fun getUsername():String
+    suspend fun searchDoctor(name:String): String
+    suspend fun setTalon(date: String, doctor: String, polyclinic: String, time: String, onComplete: (Boolean, String?) -> Unit)
 }

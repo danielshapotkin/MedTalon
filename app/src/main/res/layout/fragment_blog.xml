@@ -100,7 +100,7 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
                 android:src="@drawable/medical_services_icon"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/line_view" />
@@ -110,50 +110,52 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="44dp"
+                android:layout_marginTop="20dp"
                 android:text="Болезни"
                 app:layout_constraintStart_toEndOf="@+id/institutions_imageView"
-                app:layout_constraintTop_toBottomOf="@+id/choiceAnalysis_textView" />
+                app:layout_constraintTop_toBottomOf="@+id/line_view" />
 
             <ImageView
                 android:id="@+id/choiceAnalysis_button"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginStart="184dp"
-                android:layout_marginTop="48dp"
+                android:layout_marginStart="180dp"
+                android:layout_marginEnd="70dp"
+                android:layout_marginBottom="20dp"
                 android:src="@drawable/arrow_icon"
-                app:layout_constraintStart_toEndOf="@+id/choiceAnalysis_textView"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintBottom_toTopOf="@+id/line_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/choiceAnalysis_textView" />
 
             <ImageView
                 android:id="@+id/institutions_button"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginStart="184dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginStart="196dp"
+                android:layout_marginEnd="70dp"
+                android:layout_marginBottom="20dp"
                 android:src="@drawable/arrow_icon"
-                app:layout_constraintStart_toEndOf="@+id/choiceAnalysis_textView"
-                app:layout_constraintTop_toBottomOf="@+id/line_view" />
+                app:layout_constraintBottom_toTopOf="@+id/line_view2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/institutions_textview" />
 
             <View
                 android:id="@+id/line_view"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
                 android:background="#000000"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                app:layout_constraintBottom_toTopOf="@+id/institutions_textview"
-                app:layout_constraintTop_toBottomOf="@+id/choiceAnalysis_textView"
-                app:layout_constraintVertical_bias="0.604" />
+                app:layout_constraintBottom_toTopOf="@+id/institutions_imageView"
+                app:layout_constraintTop_toBottomOf="@+id/medical_imageView"
+                tools:layout_editor_absoluteX="0dp" />
 
             <View
                 android:id="@+id/line_view2"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="28dp"
+                android:layout_marginTop="24dp"
                 android:background="#000000"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
                 app:layout_constraintTop_toBottomOf="@+id/institutions_textview"
                 tools:layout_editor_absoluteX="0dp" />
 
@@ -171,176 +173,187 @@
                 android:id="@+id/child_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
                 android:text="Дети"
-                app:layout_constraintStart_toEndOf="@+id/institutions_imageView"
+                app:layout_constraintBottom_toTopOf="@+id/line_view4"
+                app:layout_constraintStart_toEndOf="@+id/child_imageview"
                 app:layout_constraintTop_toBottomOf="@+id/line_view2" />
 
             <ImageView
                 android:id="@+id/child_button"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginStart="184dp"
+                android:layout_marginStart="220dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginEnd="70dp"
                 android:src="@drawable/arrow_icon"
-                app:layout_constraintStart_toEndOf="@+id/choiceAnalysis_textView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/child_textview"
                 app:layout_constraintTop_toBottomOf="@+id/line_view2" />
 
             <View
                 android:id="@+id/line_view4"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="88dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
                 android:background="#000000"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                app:layout_constraintTop_toBottomOf="@+id/institutions_textview"
-                tools:layout_editor_absoluteX="10dp" />
+                app:layout_constraintBottom_toTopOf="@+id/imageView"
+                app:layout_constraintTop_toBottomOf="@+id/child_imageview"
+                tools:layout_editor_absoluteX="0dp" />
 
             <ImageView
+                android:id="@+id/imageView"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="76dp"
+                android:layout_marginTop="12dp"
                 android:src="@drawable/health_icon"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/line_view2" />
+                app:layout_constraintTop_toBottomOf="@+id/line_view4" />
 
             <TextView
+                android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="84dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="20dp"
                 android:text="Здоровье"
                 app:layout_constraintStart_toEndOf="@+id/institutions_imageView"
-                app:layout_constraintTop_toBottomOf="@+id/line_view2" />
+                app:layout_constraintTop_toBottomOf="@+id/line_view4" />
 
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginStart="184dp"
-                android:layout_marginTop="76dp"
+                android:layout_marginStart="188dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="70dp"
                 android:src="@drawable/arrow_icon"
-                app:layout_constraintStart_toEndOf="@+id/choiceAnalysis_textView"
-                app:layout_constraintTop_toBottomOf="@+id/line_view2" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView3"
+                app:layout_constraintTop_toBottomOf="@+id/line_view4" />
 
             <View
+                android:id="@+id/view2"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="252dp"
+                android:layout_marginTop="20dp"
                 android:background="#000000"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                app:layout_constraintTop_toBottomOf="@+id/institutions_textview"
-                tools:layout_editor_absoluteX="8dp" />
-
-            <ImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="232dp"
-                android:src="@drawable/nutrition_icon"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/line_view2" />
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="244dp"
-                android:text="Питание"
-                app:layout_constraintStart_toEndOf="@+id/institutions_imageView"
-                app:layout_constraintTop_toBottomOf="@+id/line_view2" />
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="184dp"
-                android:layout_marginTop="244dp"
-                android:src="@drawable/arrow_icon"
-                app:layout_constraintStart_toEndOf="@+id/choiceAnalysis_textView"
-                app:layout_constraintTop_toBottomOf="@+id/line_view2" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="196dp"
-                android:background="#000000"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                app:layout_constraintTop_toBottomOf="@+id/institutions_textview"
+                app:layout_constraintTop_toBottomOf="@+id/textView4"
                 tools:layout_editor_absoluteX="0dp" />
 
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="176dp"
-                android:src="@drawable/news_icon"
+                android:layout_marginTop="12dp"
+                android:src="@drawable/nutrition_icon"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/line_view2" />
+                app:layout_constraintTop_toBottomOf="@+id/view2" />
 
             <TextView
+                android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="188dp"
-                android:text="Новости"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="20dp"
+                android:text="Питание"
                 app:layout_constraintStart_toEndOf="@+id/institutions_imageView"
-                app:layout_constraintTop_toBottomOf="@+id/line_view2" />
+                app:layout_constraintTop_toBottomOf="@+id/view2" />
 
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginStart="184dp"
-                android:layout_marginTop="188dp"
+                android:layout_marginStart="196dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="70dp"
                 android:src="@drawable/arrow_icon"
-                app:layout_constraintStart_toEndOf="@+id/choiceAnalysis_textView"
-                app:layout_constraintTop_toBottomOf="@+id/line_view2" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView2"
+                app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="12dp"
+                android:background="#000000"
+                app:layout_constraintTop_toBottomOf="@+id/health_textview"
+                tools:layout_editor_absoluteX="0dp" />
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="12dp"
+                android:src="@drawable/news_icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="20dp"
+                android:text="Новости"
+                app:layout_constraintStart_toEndOf="@+id/institutions_imageView"
+                app:layout_constraintTop_toBottomOf="@+id/view" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="196dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="70dp"
+                android:src="@drawable/arrow_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView4"
+                app:layout_constraintTop_toBottomOf="@+id/view" />
 
             <View
                 android:id="@+id/line_view3"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="144dp"
+                android:layout_marginTop="16dp"
                 android:background="#000000"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                app:layout_constraintTop_toBottomOf="@+id/institutions_textview"
-                tools:layout_editor_absoluteX="8dp" />
+                app:layout_constraintTop_toBottomOf="@+id/textView3"
+                tools:layout_editor_absoluteX="0dp" />
 
             <ImageView
                 android:id="@+id/health_imageview"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="124dp"
-                android:src="@drawable/pills_icon"
+                android:layout_marginTop="12dp"
 
+                android:src="@drawable/pills_icon"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/line_view2" />
+                app:layout_constraintTop_toBottomOf="@+id/line_view3" />
 
             <TextView
                 android:id="@+id/health_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="132dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="20dp"
                 android:text="Лекарства"
                 app:layout_constraintStart_toEndOf="@+id/institutions_imageView"
-                app:layout_constraintTop_toBottomOf="@+id/line_view2" />
+                app:layout_constraintTop_toBottomOf="@+id/line_view3" />
 
             <ImageView
                 android:id="@+id/health_button"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginStart="184dp"
-                android:layout_marginTop="132dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="70dp"
                 android:src="@drawable/arrow_icon"
-                app:layout_constraintStart_toEndOf="@+id/choiceAnalysis_textView"
-                app:layout_constraintTop_toBottomOf="@+id/line_view2" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/health_textview"
+                app:layout_constraintTop_toBottomOf="@+id/line_view3" />
 
             <TextView
                 android:id="@+id/blog_textview"
@@ -364,8 +377,7 @@
                 android:padding="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/blog_textview"
-                app:layout_constraintVertical_bias="0.158"
-                >
+                app:layout_constraintVertical_bias="0.158">
 
                 <TextView
                     android:id="@+id/snore_textView"
@@ -374,16 +386,15 @@
                     android:padding="8dp"
                     android:text="Чем опасен храп и как от него избавиться?"
                     android:textColor="@color/blue"
-                    android:textSize="16sp"
-                    />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
-                    android:textStyle="italic"
                     android:text="Анастасия Шунто       👁5516"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:textStyle="italic" />
 
                 <TextView
                     android:id="@+id/eyesInfo_textView"
@@ -392,8 +403,7 @@
                     android:padding="8dp"
                     android:text="Круги и мешки под глазами: почему возникают и как убрать?"
                     android:textColor="@color/blue"
-                    android:textSize="16sp"
-                    />
+                    android:textSize="16sp" />
                 />
 
                 <TextView
@@ -402,11 +412,10 @@
                     android:padding="8dp"
                     android:text="Катерина Киселева        👁3986"
                     android:textSize="14sp"
-                    android:textStyle="italic"/>
+                    android:textStyle="italic" />
 
 
             </LinearLayout>
-
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

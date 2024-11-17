@@ -4,17 +4,23 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
 import android.view.MenuInflater
+import android.widget.ArrayAdapter
 import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.medtalon.data.DataBase
+import com.example.medtalon.domain.Doctor
 import com.example.test2.R
 import com.example.test2.databinding.ActivityGetTalonBinding
 import com.example.test2.databinding.ActivityMainBinding
 import java.util.Calendar
 
+@Suppress("NAME_SHADOWING")
 class GetTalonActivity : AppCompatActivity() {
     private lateinit var binding: ActivityGetTalonBinding
+    private val dataBase: DataBase = DataBase.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,5 +79,29 @@ class GetTalonActivity : AppCompatActivity() {
             timePickerDialog.show()
         }
 
+        dataBase.getDoctors { success, doctors, error ->
+            if (success && doctors != null) {
+                updateSpinner(doctors)
+            } else {
+                Toast.makeText(this, "Ошибка загрузки врачей: $error", Toast.LENGTH_LONG).show()
+            }
+        }
     }
-}
+    private fun updateSpinner(doctors: List<Doctor>) {
+        // Создаем список имен врачей
+        val doctorNames = doctors.map { "${it.surname} ${it.name} ${it.patronymic}" }
+
+        // Устанавливаем адаптер для Spinner
+        val adapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_spinner_item, // Разметка для элемента списка
+            doctorNames
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+        binding.doctorSpinner.adapter = adapter
+    }
+    }
+
+
+

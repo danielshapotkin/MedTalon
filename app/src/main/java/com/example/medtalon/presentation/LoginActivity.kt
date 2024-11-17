@@ -11,6 +11,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.test2.R
 import com.example.test2.databinding.ActivityLoginBinding
 import com.example.test2.databinding.ActivityMainBinding
+import kotlin.math.log
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -21,9 +22,18 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+    binding.btnRegister.setOnClickListener{
+        val login = binding.registerEditText.text.toString()
+        val password = binding.registerPasswordEditText.text.toString()
+        homeViewModel.register(login, password){isSuccesfull, message->
+            if (isSuccesfull){binding.viewFlipper.showNext()}
+        }
+    }
 
         binding.btnLogin.setOnClickListener {
-            homeViewModel.login()
+            val login = binding.loginEditText.text.toString()
+            val password = binding.loginPasswordEditText.text.toString()
+            homeViewModel.login(login, password)
             finish()
         }
 
@@ -34,16 +44,12 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-
-
-
         binding.backButton.setOnClickListener {
             finish()
         }
 
         binding.tvToggleLoginRegister.setOnClickListener {
             binding.viewFlipper.showNext()
-
             binding.tvToggleLoginRegister.text = if (binding.viewFlipper.displayedChild == 0) {
                 "Еще нет аккаунта? Зарегистрироваться"
             } else {
