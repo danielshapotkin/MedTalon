@@ -111,7 +111,11 @@ class HomeFragment : Fragment() {
                     val intent = Intent(requireContext(), MedicalInstitutionsActivity::class.java)
                     startActivity(intent)
                 }
-                Events.PayServices -> TODO()
+
+                Events.PayServices -> {
+                    val intent = Intent(requireContext(), MedicalInstitutionsActivity::class.java)
+                    startActivity(intent)
+                }
 
                 Events.Search -> {
                     val query = binding.searchEditText.text.toString()

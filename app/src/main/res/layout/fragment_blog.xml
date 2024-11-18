@@ -116,7 +116,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/line_view" />
 
             <ImageView
-                android:id="@+id/choiceAnalysis_button"
+                android:id="@+id/allnews_button"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginStart="180dp"
@@ -128,7 +128,7 @@
                 app:layout_constraintStart_toEndOf="@+id/choiceAnalysis_textView" />
 
             <ImageView
-                android:id="@+id/institutions_button"
+                android:id="@+id/ills_button"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginStart="196dp"
@@ -225,6 +225,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/line_view4" />
 
             <ImageView
+                android:id="@+id/health_button"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginStart="188dp"
@@ -264,6 +265,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/view2" />
 
             <ImageView
+                android:id="@+id/nutrition_button"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginStart="196dp"
@@ -303,6 +305,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/view" />
 
             <ImageView
+                android:id="@+id/news_button"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginStart="196dp"
@@ -344,7 +347,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/line_view3" />
 
             <ImageView
-                android:id="@+id/health_button"
+                android:id="@+id/pills_button"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginStart="184dp"

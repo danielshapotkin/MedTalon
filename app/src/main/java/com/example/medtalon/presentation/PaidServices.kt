@@ -1,26 +1,26 @@
 package com.example.medtalon.presentation
 
-import Polyclinic
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ArrayAdapter
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import com.example.medtalon.PolyclinicAdapter
+import com.example.medtalon.PaidServicesAdapter
 import com.example.medtalon.data.DataBase
+import com.example.medtalon.domain.PaidService
 import com.example.test2.R
-import com.example.test2.databinding.ActivityMedicalInstitutionsBinding
+import com.example.test2.databinding.ActivityPaidServicesBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
-class MedicalInstitutionsActivity : AppCompatActivity() {
+class PaidServices : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMedicalInstitutionsBinding
-    private val dataBase: DataBase = DataBase.getInstance()
+    private lateinit var binding: ActivityPaidServicesBinding
     private val homeViewModel: HomeViewModel = HomeViewModel.getInstance()
+    private val dataBase: DataBase = DataBase.getInstance()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        binding = ActivityPaidServicesBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
-        binding = ActivityMedicalInstitutionsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.backButton.setOnClickListener {
@@ -51,17 +51,18 @@ class MedicalInstitutionsActivity : AppCompatActivity() {
             bottomSheetDialog.show()
         }
 
-        dataBase.getPolyclinics { success, polyclinics, error ->
-            if (success && polyclinics != null) {
-                updateListView(polyclinics)
+        dataBase.getPaidServices { success, paidServices, error ->
+            if (success && paidServices != null) {
+                updateListView(paidServices)
             } else {
                 println("Ошибка при получении поликлиник: $error")
             }
         }
     }
 
-    private fun updateListView(polyclinics: List<Polyclinic>) {
-        val adapter = PolyclinicAdapter(this, polyclinics)
-        binding.medicalInstitutionsListView.adapter = adapter
+    private fun updateListView(polyclinics: List<PaidService>) {
+        val adapter = PaidServicesAdapter(this, polyclinics)
+        binding.paidServicesListView.adapter = adapter
     }
+
 }

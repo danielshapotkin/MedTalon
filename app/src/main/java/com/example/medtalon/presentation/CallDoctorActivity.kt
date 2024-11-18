@@ -25,12 +25,11 @@ class CallDoctorActivity : AppCompatActivity() {
         binding = ActivityCallDoctorBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         binding.backButton.setOnClickListener {
             finish()
         }
 
-        binding.profileButton.setOnClickListener{
+        binding.profileButton.setOnClickListener {
             val bottomSheetDialog = BottomSheetDialog(this)
             val view = layoutInflater.inflate(R.layout.bottom_sheet_layout, null)
             view.findViewById<Button>(R.id.view_profile_button).setOnClickListener {
@@ -54,14 +53,11 @@ class CallDoctorActivity : AppCompatActivity() {
             bottomSheetDialog.show()
         }
 
-
-binding.showMoreInfo.setOnClickListener{
-    val url = "https://26poliklinika.by"
-    val intent = Intent(Intent.ACTION_VIEW)
-    intent.data = Uri.parse(url)
-    startActivity(intent)
-}
-
-
+        binding.showMoreInfo.setOnClickListener {
+            val url = "https://26poliklinika.by"
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
+            startActivity(intent)
+        }
     }
 }

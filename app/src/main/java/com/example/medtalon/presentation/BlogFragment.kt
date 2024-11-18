@@ -46,6 +46,56 @@ private val homeViewModel: HomeViewModel = HomeViewModel.getInstance()
             startActivity(intent)
         }
 
+        binding.allnewsButton.setOnClickListener{
+            val url = "https://blog.talon.by/section/news/articles"
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
+            startActivity(intent)
+        }
+
+        binding.illsButton.setOnClickListener{
+            val url = "https://blog.talon.by/section/news/articles"
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
+            startActivity(intent)
+        }
+
+        binding.childButton.setOnClickListener{
+            val url = "https://blog.talon.by/section/news/articles"
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
+            startActivity(intent)
+        }
+
+        binding.healthButton.setOnClickListener{
+            val url = "https://blog.talon.by/section/news/articles"
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
+            startActivity(intent)
+        }
+
+        binding.pillsButton.setOnClickListener{
+            val url = "https://blog.talon.by/section/news/articles"
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
+            startActivity(intent)
+        }
+
+        binding.newsButton.setOnClickListener{
+            val url = "https://blog.talon.by/section/news/articles"
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
+            startActivity(intent)
+        }
+
+        binding.nutritionButton.setOnClickListener{
+            val url = "https://blog.talon.by/section/news/articles"
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
+            startActivity(intent)
+        }
+
+
         return binding.root
     }
 }

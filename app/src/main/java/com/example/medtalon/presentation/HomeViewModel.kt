@@ -28,12 +28,12 @@ class HomeViewModel private constructor() {
     sealed class Events {
         object Login : Events()
         data class Regions(val view: View) : Events()
-        object Talon: Events()
-        object Doctor: Events()
-        object MedicalInstitutions: Events()
-        object PayServices: Events()
-        object Search: Events()
-        object Profile: Events()
+        object Talon : Events()
+        object Doctor : Events()
+        object MedicalInstitutions : Events()
+        object PayServices : Events()
+        object Search : Events()
+        object Profile : Events()
     }
 
     companion object {
@@ -56,16 +56,16 @@ class HomeViewModel private constructor() {
         _events.value = null
     }
 
-    fun register(email: String, password: String, onComplete: (Boolean, String?) -> Unit){
-auth.registerUser(email, password) { isSuccess, message->
-        message?.let { Log.d("MyLogs", it) }
-}
+    fun register(email: String, password: String, onComplete: (Boolean, String?) -> Unit) {
+        auth.registerUser(email, password) { isSuccess, message ->
+            message?.let { Log.d("MyLogs", it) }
+        }
     }
 
     fun login(email: String, password: String) {
-auth.loginUser(email, password) {isSuccess, message->
-        message?.let { Log.d("MyLogs", it) }
-}
+        auth.loginUser(email, password) { isSuccess, message ->
+            message?.let { Log.d("MyLogs", it) }
+        }
         isLogin = true
         saveLoginState(true)
     }

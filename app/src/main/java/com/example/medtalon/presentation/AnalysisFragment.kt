@@ -31,6 +31,10 @@ class AnalysisFragment : Fragment() {
             homeViewModel.showProfile()
         }
 
+        binding.choiceAnalysisButton.setOnClickListener{
+
+        }
+
         binding.snoreTextView.setOnClickListener {
             val url = "https://medsi.ru/articles/khrap-prichiny-i-opasnosti/"
             val intent = Intent(Intent.ACTION_VIEW)

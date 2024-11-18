@@ -66,7 +66,6 @@ class GetTalonActivity : AppCompatActivity() {
             datePickerDialog.show()
         }
 
-        // Установка обработчика нажатия для выбора времени
         binding.selectTimeButton.setOnClickListener {
             val calendar = Calendar.getInstance()
             val hour = calendar.get(Calendar.HOUR_OF_DAY)
@@ -86,7 +85,33 @@ class GetTalonActivity : AppCompatActivity() {
                 Toast.makeText(this, "Ошибка загрузки врачей: $error", Toast.LENGTH_LONG).show()
             }
         }
+        val adapter = ArrayAdapter(
+            this, // Контекст
+            android.R.layout.simple_spinner_item, // Стиль элемента
+            specializations
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+        binding.specializationSpinner.adapter=adapter
+
+        binding.getTalonButton.setOnClickListener{
+            val specialization = binding.specializationLabel.text.toString()
+            val doctor = binding.doctorLabel.toString()
+            val date = binding.dateLabel.text.toString()
+            val time = binding.timeLabel.text.toString()
+            binding.orderTicketTitle.text = "$specialization - $doctor - $date - $time"
+        }
     }
+
+
+    val specializations = listOf(
+        "Терапевт",
+        "Хирург",
+        "Кардиолог",
+        "Педиатр",
+        "Невролог"
+    )
+
     private fun updateSpinner(doctors: List<Doctor>) {
         // Создаем список имен врачей
         val doctorNames = doctors.map { "${it.surname} ${it.name} ${it.patronymic}" }
