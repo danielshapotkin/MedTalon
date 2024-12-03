@@ -4,10 +4,12 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.TextView
+import android.widget.Toast
 import android.widget.ViewFlipper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.medtalon.data.DataBase
 import com.example.test2.R
 import com.example.test2.databinding.ActivityLoginBinding
 import com.example.test2.databinding.ActivityMainBinding
@@ -25,8 +27,11 @@ class LoginActivity : AppCompatActivity() {
     binding.btnRegister.setOnClickListener{
         val login = binding.registerEditText.text.toString()
         val password = binding.registerPasswordEditText.text.toString()
-        homeViewModel.register(login, password){isSuccesfull, message->
-            if (isSuccesfull){binding.viewFlipper.showNext()}
+        homeViewModel.register(login, password){isSuccess, message->
+            if (isSuccess){binding.viewFlipper.showNext()}
+            else{
+                Toast.makeText(this, "Неверно заполнен Email или недостаточно надежный пароль", Toast.LENGTH_LONG).show()
+            }
         }
     }
 

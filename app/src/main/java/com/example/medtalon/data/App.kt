@@ -1,4 +1,4 @@
-package com.example.medtalon
+package com.example.medtalon.data
 
 import android.app.Application
 import android.content.Context

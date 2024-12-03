@@ -1,4 +1,4 @@
-package com.example.medtalon
+package com.example.medtalon.adapters
 
 import Polyclinic
 import android.content.Context

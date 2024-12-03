@@ -1,4 +1,4 @@
-package com.example.medtalon
+package com.example.medtalon.adapters
 
 import android.content.Context
 import android.view.LayoutInflater

@@ -29,7 +29,6 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         homeViewModel.events.observe(viewLifecycleOwner, eventsListener)
 
-
         binding.getTalonButton.setOnClickListener {
             homeViewModel.getTalon()
         }
@@ -113,7 +112,7 @@ class HomeFragment : Fragment() {
                 }
 
                 Events.PayServices -> {
-                    val intent = Intent(requireContext(), MedicalInstitutionsActivity::class.java)
+                    val intent = Intent(requireContext(), PaidServicesActivity::class.java)
                     startActivity(intent)
                 }
 
@@ -128,6 +127,7 @@ class HomeFragment : Fragment() {
                 Events.Profile -> {
                     val bottomSheetDialog = BottomSheetDialog(requireContext())
                     val view = layoutInflater.inflate(R.layout.bottom_sheet_layout, null)
+
                     view.findViewById<Button>(R.id.view_profile_button).setOnClickListener {
                         val intent = Intent(requireContext(), ProfileActivity::class.java)
                         startActivity(intent)
@@ -144,15 +144,12 @@ class HomeFragment : Fragment() {
                         homeViewModel.logout()
                         bottomSheetDialog.dismiss()
                     }
-
                     bottomSheetDialog.setContentView(view)
                     bottomSheetDialog.show()
                 }
             }
         }
     }
-
-
 }
 
 

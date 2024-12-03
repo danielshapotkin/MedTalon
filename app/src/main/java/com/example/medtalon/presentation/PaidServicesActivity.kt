@@ -4,16 +4,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import com.example.medtalon.PaidServicesAdapter
+import com.example.medtalon.adapters.PaidServicesAdapter
 import com.example.medtalon.data.DataBase
 import com.example.medtalon.domain.PaidService
 import com.example.test2.R
 import com.example.test2.databinding.ActivityPaidServicesBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
-class PaidServices : AppCompatActivity() {
+class PaidServicesActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityPaidServicesBinding
+    private lateinit var binding : ActivityPaidServicesBinding
     private val homeViewModel: HomeViewModel = HomeViewModel.getInstance()
     private val dataBase: DataBase = DataBase.getInstance()
 
@@ -65,4 +65,4 @@ class PaidServices : AppCompatActivity() {
         binding.paidServicesListView.adapter = adapter
     }
 
-}
+    }

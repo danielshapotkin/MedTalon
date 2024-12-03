@@ -5,25 +5,34 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.medtalon.App
+import com.example.medtalon.data.App
 import com.example.medtalon.data.Auth
+import com.example.medtalon.data.DataBase
 
 class HomeViewModel private constructor() {
 
     var isLogin = false
-        private set  // Закрываем возможность изменения извне
-    private val _states = MutableLiveData(States("", false))
     private val _events = MutableLiveData<Events>()
-    val states: LiveData<States> get() = _states
     val events: LiveData<Events> get() = _events
     private val auth: Auth = Auth()
+    private val dataBase: DataBase = DataBase.getInstance()
+
 
     init {
         val sharedPrefs = App.context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         isLogin = sharedPrefs.getBoolean("is_login", false)
     }
 
-    data class States(val text: String, val isShowProgress: Boolean)
+    companion object {
+        @Volatile
+        private var INSTANCE: HomeViewModel? = null
+
+        fun getInstance(): HomeViewModel {
+            return INSTANCE ?: synchronized(this) {
+                INSTANCE ?: HomeViewModel().also { INSTANCE = it }
+            }
+        }
+    }
 
     sealed class Events {
         object Login : Events()
@@ -36,15 +45,9 @@ class HomeViewModel private constructor() {
         object Profile : Events()
     }
 
-    companion object {
-        @Volatile
-        private var INSTANCE: HomeViewModel? = null
-
-        fun getInstance(): HomeViewModel {
-            return INSTANCE ?: synchronized(this) {
-                INSTANCE ?: HomeViewModel().also { INSTANCE = it }
-            }
-        }
+    private fun saveLoginState(isLoggedIn: Boolean) {
+        val sharedPrefs = App.context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        sharedPrefs.edit().putBoolean("is_login", isLoggedIn).apply()
     }
 
     fun showProfile() {
@@ -64,21 +67,27 @@ class HomeViewModel private constructor() {
 
     fun login(email: String, password: String) {
         auth.loginUser(email, password) { isSuccess, message ->
-            message?.let { Log.d("MyLogs", it) }
+            message?.let { Log.d("LoginLogs", it) }
+            if (isSuccess) {
+                isLogin = true
+                saveLoginState(true)
+
+                dataBase.linkUserToClinic(userId = auth.getCurrentUserId(), clinicId = "1", onSuccess = {
+                    println("Пользователь привязан к поликлинике")
+                },
+                    onError = { exception->
+                        println("Произошла ошибка ${exception.message}")
+                    })
+
+
+            }
         }
-        isLogin = true
-        saveLoginState(true)
+
     }
 
-    // Метод для выхода из системы и обновления состояния
     fun logout() {
         isLogin = false
         saveLoginState(false)
-    }
-
-    private fun saveLoginState(isLoggedIn: Boolean) {
-        val sharedPrefs = App.context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-        sharedPrefs.edit().putBoolean("is_login", isLoggedIn).apply()
     }
 
     fun showRegions(view: View) {

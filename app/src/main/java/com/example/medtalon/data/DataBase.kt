@@ -171,17 +171,19 @@ class DataBase private constructor(): IDataBase {
             }
     }
 
-    fun assignClinicToUser(userId: String, clinicId: String) {
+    fun linkUserToClinic(userId: String, clinicId: String, onSuccess: () -> Unit, onError: (Exception) -> Unit) {
         val db = FirebaseFirestore.getInstance()
-        val userRef = db.collection("Users").document(userId)
 
-        // Обновляем поле clinicId в документе пользователя
-        userRef.update("clinicId", clinicId)
+        // Обновляем документ пользователя, добавляя clinicId
+        db.collection("users").document(userId)
+            .update("clinicId", clinicId)
             .addOnSuccessListener {
-                println("Поликлиника успешно закреплена за пользователем.")
+                println("User $userId successfully linked to clinic $clinicId")
+                onSuccess()
             }
-            .addOnFailureListener { e ->
-                println("Ошибка при закреплении поликлиники: ${e.message}")
+            .addOnFailureListener { exception ->
+                println("Error linking user to clinic: ${exception.message}")
+                onError(exception)
             }
     }
 

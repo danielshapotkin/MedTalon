@@ -26,10 +26,14 @@ class Auth {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     onComplete(true, "Вход выполнен успешно!")
-                    Log.d("MyLogs", auth.currentUser.toString())
+                    auth.currentUser?.let { Log.d("CurrentUser", it.uid) }
                 } else {
                     onComplete(false, task.exception?.message)
                 }
             }
+    }
+
+    fun getCurrentUserId(): String{
+        return auth.currentUser?.uid ?: "No Current User"
     }
 }

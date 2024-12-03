@@ -87,29 +87,33 @@
         app:layout_constraintTop_toBottomOf="@id/language_button" />
 
     <!-- Кнопка для политики конфиденциальности -->
+
+    <!-- Кнопка выхода из профиля -->
+
     <Button
-        android:id="@+id/privacy_policy_button"
+        android:id="@+id/privacyPolicyButton"
+        style="@style/orangeButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Политика конфиденциальности"
-        style="@style/orangeButton"
         android:background="@drawable/orange_button_background"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="Политика конфиденциальности"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/theme_button" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/theme_button" />
 
-    <!-- Кнопка выхода из профиля -->
     <Button
         android:id="@+id/logout_button"
+        style="@style/orangeButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Выйти из профиля"
-        style="@style/orangeButton"
+        android:layout_marginTop="40dp"
         android:background="@drawable/orange_button_background"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="Выйти"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/privacy_policy_button" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/privacyPolicyButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

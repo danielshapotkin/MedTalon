@@ -1,43 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="8dp">
-
-    <TextView
-        android:id="@+id/polyclinic_name"
+    android:padding="8dp"
+    android:background="@color/beige">
+    <LinearLayout
+        android:id="@+id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Поликлиника"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Кнопка "Назад" -->
+        <ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Назад"
+            android:src="@drawable/arrow_back" />
+
+        <!-- Заголовок "Заказ талона" -->
+        <TextView
+            android:id="@+id/order_ticket_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Талоны"
+            android:textSize="16sp"/>
+
+        <!-- Кнопка "Профиль" -->
+        <ImageButton
+            android:id="@+id/profile_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Профиль"
+            android:src="@drawable/profile_icon" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">
+
+    <EditText
+        android:id="@+id/polyclinic_name"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Грушевская Любовь Васильевна"
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_marginTop="20dp"
         android:textColor="@color/orange"/>
 
-    <TextView
+        <ImageButton
+            android:id="@+id/edit_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/save_icon" />
+
+    </LinearLayout>
+
+    <EditText
         android:id="@+id/polyclinic_worktime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Часы работы" />
+        android:text="Терапевт" />
 
-    <TextView
+    <EditText
         android:id="@+id/polyclinic_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Email" />
+        android:text="18/11/2024" />
 
-    <TextView
+    <EditText
         android:id="@+id/polyclinic_adress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Адрес" />
+        android:text="11:30" />
 
     <TextView
         android:id="@+id/polyclinic_url"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Url" />
+        android:text="" />
 
 
 </LinearLayout>
+

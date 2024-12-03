@@ -21,6 +21,13 @@ import java.util.Calendar
 class GetTalonActivity : AppCompatActivity() {
     private lateinit var binding: ActivityGetTalonBinding
     private val dataBase: DataBase = DataBase.getInstance()
+    private val specializations = listOf(
+        "Терапевт",
+        "Хирург",
+        "Кардиолог",
+        "Педиатр",
+        "Невролог"
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +38,7 @@ class GetTalonActivity : AppCompatActivity() {
             finish()
         }
 
-        binding.profileButton.setOnClickListener{
+        binding.profileButton.setOnClickListener {
             val popup = PopupMenu(this, it)
             val inflater: MenuInflater = popup.menuInflater
             inflater.inflate(R.menu.profile_menu, popup.menu)
@@ -41,10 +48,12 @@ class GetTalonActivity : AppCompatActivity() {
 
                         true
                     }
+
                     R.id.logout -> {
 
                         true
                     }
+
                     else -> false
                 }
             }
@@ -60,9 +69,10 @@ class GetTalonActivity : AppCompatActivity() {
             val datePickerDialog = DatePickerDialog(
                 this,
                 { _, year, monthOfYear, dayOfMonth ->
-                val selectedDate = "$dayOfMonth/${monthOfYear + 1}/$year"
-                binding.selectedDate.text = selectedDate
-            }, year, month, day)
+                    val selectedDate = "$dayOfMonth/${monthOfYear + 1}/$year"
+                    binding.selectedDate.text = selectedDate
+                }, year, month, day
+            )
             datePickerDialog.show()
         }
 
@@ -85,48 +95,39 @@ class GetTalonActivity : AppCompatActivity() {
                 Toast.makeText(this, "Ошибка загрузки врачей: $error", Toast.LENGTH_LONG).show()
             }
         }
-        val adapter = ArrayAdapter(
+        val specializationsadapter = ArrayAdapter(
             this, // Контекст
             android.R.layout.simple_spinner_item, // Стиль элемента
             specializations
         )
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        specializationsadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
-        binding.specializationSpinner.adapter=adapter
+        binding.specializationSpinner.adapter = specializationsadapter
 
-        binding.getTalonButton.setOnClickListener{
-            val specialization = binding.specializationLabel.text.toString()
-            val doctor = binding.doctorLabel.toString()
-            val date = binding.dateLabel.text.toString()
-            val time = binding.timeLabel.text.toString()
-            binding.orderTicketTitle.text = "$specialization - $doctor - $date - $time"
+        binding.getTalonButton.setOnClickListener {
+            val specialization = binding.specializationSpinner.selectedItem.toString()
+            val doctor = binding.doctorSpinner.selectedItem.toString()
+            val date = binding.selectedDate.text
+            val time = binding.selectedTime.text
+            binding.ticketDetails.text = "$specialization - $doctor - $date - $time"
         }
     }
-
-
-    val specializations = listOf(
-        "Терапевт",
-        "Хирург",
-        "Кардиолог",
-        "Педиатр",
-        "Невролог"
-    )
 
     private fun updateSpinner(doctors: List<Doctor>) {
         // Создаем список имен врачей
         val doctorNames = doctors.map { "${it.surname} ${it.name} ${it.patronymic}" }
 
         // Устанавливаем адаптер для Spinner
-        val adapter = ArrayAdapter(
+        val doctoradapter = ArrayAdapter(
             this,
             android.R.layout.simple_spinner_item, // Разметка для элемента списка
             doctorNames
         )
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        doctoradapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
-        binding.doctorSpinner.adapter = adapter
+        binding.doctorSpinner.adapter = doctoradapter
     }
-    }
+}
 
 
 

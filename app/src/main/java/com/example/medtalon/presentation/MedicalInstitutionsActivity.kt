@@ -3,10 +3,9 @@ package com.example.medtalon.presentation
 import Polyclinic
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ArrayAdapter
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import com.example.medtalon.PolyclinicAdapter
+import com.example.medtalon.adapters.PolyclinicAdapter
 import com.example.medtalon.data.DataBase
 import com.example.test2.R
 import com.example.test2.databinding.ActivityMedicalInstitutionsBinding
