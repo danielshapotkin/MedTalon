@@ -11,11 +11,18 @@ import com.example.medtalon.data.DataBase
 
 class HomeViewModel private constructor() {
 
+    var currentUser = "1"
     var isLogin = false
     private val _events = MutableLiveData<Events>()
     val events: LiveData<Events> get() = _events
     private val auth: Auth = Auth()
     private val dataBase: DataBase = DataBase.getInstance()
+    private val _selectedRegion = MutableLiveData<String>()
+    val selectedRegion: LiveData<String> get() = _selectedRegion
+
+    fun setSelectedRegion(region: String){
+        _selectedRegion.value = region
+    }
 
 
     init {
@@ -59,31 +66,6 @@ class HomeViewModel private constructor() {
         _events.value = null
     }
 
-    fun register(email: String, password: String, onComplete: (Boolean, String?) -> Unit) {
-        auth.registerUser(email, password) { isSuccess, message ->
-            message?.let { Log.d("MyLogs", it) }
-        }
-    }
-
-    fun login(email: String, password: String) {
-        auth.loginUser(email, password) { isSuccess, message ->
-            message?.let { Log.d("LoginLogs", it) }
-            if (isSuccess) {
-                isLogin = true
-                saveLoginState(true)
-
-                dataBase.linkUserToClinic(userId = auth.getCurrentUserId(), clinicId = "1", onSuccess = {
-                    println("Пользователь привязан к поликлинике")
-                },
-                    onError = { exception->
-                        println("Произошла ошибка ${exception.message}")
-                    })
-
-
-            }
-        }
-
-    }
 
     fun logout() {
         isLogin = false

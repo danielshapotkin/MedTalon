@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="@color/beige"
+    android:background="@color/white"
     tools:context="com.example.medtalon.presentation.MedicalInstitutionsActivity">
 
     <LinearLayout
@@ -27,12 +27,12 @@
 
         <!-- Заголовок "Заказ талона" -->
         <TextView
-            android:id="@+id/order_ticket_title"
+            android:id="@+id/tw"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Поликлиники"
+            android:text="Медучреждения"
             android:textSize="16sp"/>
 
         <!-- Кнопка "Профиль" -->
@@ -45,15 +45,56 @@
             android:src="@drawable/profile_icon" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/title_tw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="Медицинские учреждения"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_bar" />
+
+    <EditText
+        android:id="@+id/search_editText"
+        android:layout_width="316dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="28dp"
+        android:height="50dp"
+        android:background="@drawable/solid_and_stroke"
+        android:hint="Введите название учреждения"
+        android:paddingStart="12dp"
+        android:textAppearance="@style/HintTextStyle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_tw" />
+
+    <Button
+        android:id="@+id/search_button"
+        style="@style/orangeButton"
+        android:layout_width="48dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/solid_and_stroke"
+        android:drawableLeft="@drawable/search_icon"
+        android:padding="10dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/search_editText"
+        app:layout_constraintTop_toBottomOf="@+id/title_tw" />
+
     <ListView
         android:id="@+id/medical_institutions_listView"
-        android:layout_width="391dp"
-        android:layout_height="849dp"
+        android:layout_width="365dp"
+        android:layout_height="471dp"
         android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/top_bar"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

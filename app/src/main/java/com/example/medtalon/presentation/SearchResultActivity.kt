@@ -3,21 +3,15 @@ package com.example.medtalon.presentation
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuInflater
 import android.widget.PopupMenu
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.example.medtalon.data.DataBase
 import com.example.medtalon.data.Repository
 import com.example.medtalon.domain.IRepository
 import com.example.test2.R
-import com.example.test2.databinding.ActivityCallDoctorBinding
-import com.example.test2.databinding.ActivityGetTalonBinding
 import com.example.test2.databinding.ActivitySearchResultBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -39,11 +33,11 @@ class SearchResultActivity : AppCompatActivity(
         binding = ActivitySearchResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val doctorName = intent.getStringExtra("DOCTOR_NAME")
+        val query = intent.getStringExtra("QUERY")
         lifecycleScope.launch {
-            if (doctorName != null) {
+            if (query != null) {
                 val result = withContext(Dispatchers.IO) {
-                    repository.searchDoctor(doctorName)
+                    repository.search(query)
                 }
                 binding.searchResultsTextView.text = result
             }
@@ -132,8 +126,6 @@ class SearchResultActivity : AppCompatActivity(
             builder.setNegativeButton("Отмена") { dialog, _ ->
                 dialog.dismiss()
             }
-
-            // Показать диалог
             val dialog = builder.create()
             dialog.show()
         }

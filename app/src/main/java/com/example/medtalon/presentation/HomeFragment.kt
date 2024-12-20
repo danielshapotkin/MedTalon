@@ -91,6 +91,7 @@ class HomeFragment : Fragment() {
                     popupMenu.menuInflater.inflate(R.menu.region_menu, popupMenu.menu)
                     popupMenu.setOnMenuItemClickListener { item ->
                         binding.regionButton.text = item.title
+                        homeViewModel.setSelectedRegion(item.title.toString())
                         true
                     }
                     popupMenu.show()
@@ -119,7 +120,7 @@ class HomeFragment : Fragment() {
                 Events.Search -> {
                     val query = binding.searchEditText.text.toString()
                     val intent = Intent(requireContext(), SearchResultActivity::class.java).apply {
-                        putExtra("DOCTOR_NAME", query)
+                        putExtra("QUERY", query)
                     }
                     startActivity(intent)
                 }

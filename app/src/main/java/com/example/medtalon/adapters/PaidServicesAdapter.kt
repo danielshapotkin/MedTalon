@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.TextView
 import com.example.medtalon.domain.PaidService
 import com.example.test2.R
@@ -21,14 +22,11 @@ class PaidServicesAdapter(context: Context, private val paidServices: List<PaidS
         val addressTextView = view.findViewById<TextView>(R.id.polyclinic_adress)
         val urlTextView = view.findViewById<TextView>(R.id.polyclinic_url)
 
-
         nameTextView.text = paidService.name
         priceTextView.text = paidService.price
         emailTextView.text = ""
         addressTextView.text = ""
         urlTextView.text = ""
-
-
 
         return view
     }

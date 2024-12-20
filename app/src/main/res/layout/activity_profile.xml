@@ -49,43 +49,76 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
-        android:text="Щапоткин Даниил Павлович"
+        android:text="Шапоткин Даниил Павлович"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/top_bar" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <EditText
+        android:id="@+id/polyclinicEditText"
+        android:layout_width="359dp"
+        android:layout_height="61dp"
         android:layout_marginTop="36dp"
-        android:text="26-я городская поликлиника \n Г. Минска"
+        android:hint="Введите поликлинику"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name_textView" />
 
+    <EditText
+        android:id="@+id/nameEditText"
+        android:layout_width="359dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="16dp"
+        android:hint="Введите имя пациента"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/polyclinicEditText" />
+
+    <EditText
+        android:id="@+id/surnameEditText"
+        android:layout_width="359dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="8dp"
+        android:hint="Введите фамилию пациента"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameEditText" />
+
+    <EditText
+        android:id="@+id/patronymicEditText"
+        android:layout_width="359dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="12dp"
+        android:hint="Введите отчество пациента"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/surnameEditText" />
+
     <TextView
         android:id="@+id/show_more_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="56dp"
         android:clickable="true"
         android:focusable="true"
         android:text="Показать подробнее ▼"
-        android:textSize="10sp"
         android:textColor="@color/text_color_selector"
+        android:textSize="10sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/patronymicEditText" />
 
     <TextView
         android:id="@+id/hidden_polyclinicInfo_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="г. Минск, ул. Кунцевщина 8 \n\nРегистратура/вызов врача: +375 17 379-85-65\n\nПН-ПТ: 7:00-20:00\nСБ: 8:30-18:00"
+        android:text="Регистратура/вызов врача: +375 17 379-85-65\n\nПН-ПТ: 7:00-20:00\nСБ: 8:30-18:00"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/show_more_text" />

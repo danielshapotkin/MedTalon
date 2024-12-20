@@ -1,14 +1,21 @@
 package com.example.medtalon.data
 
 import android.content.Context
+import android.util.Log
 import com.example.medtalon.domain.IRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlinx.coroutines.withContext
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 class Repository(
     private val context: Context,
 ) : IRepository {
-  private val dataBase: DataBase = DataBase.getInstance()
+    private val dataBase: DataBase = DataBase.getInstance()
 
     companion object {
         @Volatile
@@ -27,28 +34,34 @@ class Repository(
         }
     }
 
-    override suspend fun searchDoctor(name: String): String {
-        val resultText = StringBuilder()
-        return suspendCoroutine { continuation ->
-            dataBase.searchDoctor(name) { success, data, error ->
-                if (success && data != null) {
-                    data.forEach { doctor ->
-                        resultText.append("Доктор: ${doctor.surname} ${doctor.name}\n ${doctor.patronymic}\n")
-                        resultText.append("Специализация: ${doctor.qualification}\n")
-                        resultText.append("-------------------------------------------------\n")
-                    }
-                    continuation.resume(resultText.toString())
-                } else {
-                    continuation.resume("Ошибка: $error")
-                }
+    override suspend fun setTalon(
+        date: String,
+        doctor: String,
+        polyclinic: String,
+        time: String,
+        onComplete: (Boolean, String?) -> Unit
+    ) {
+        dataBase.setTalon(date, doctor, polyclinic, time, onComplete)
+    }
+
+    override suspend fun search(query: String): String {
+        return try {
+            val (polyclinics, paidServices, doctors) = dataBase.searchInCollections(query)
+
+            val result = buildString {
+                polyclinics.forEach { append("- ${it.name} ${it.address}\n ${it.worktime}\n ${it.url}\n ${it.email}\n") }
+
+                paidServices.forEach { append("- ${it.name}\n ${it.price}\n") }
+
+                doctors.forEach { append("- ${it.name} ${it.surname} ${it.patronymic}\n ${it.qualification}") }
             }
+
+            result
+        } catch (e: Exception) {
+            Log.e("Repository", "Error during search: ${e.message}", e)
+            "Error: ${e.message}"
         }
     }
-
-    override suspend fun setTalon(date: String, doctor: String, polyclinic: String, time: String, onComplete: (Boolean, String?) -> Unit) {
-            dataBase.setTalon(date, doctor, polyclinic, time, onComplete)
-    }
-
 
 
 

@@ -14,19 +14,17 @@ class Auth {
                 if (task.isSuccessful) {
                     onComplete(true, "Пользователь успешно зарегистрирован!")
                 } else {
-                    Log.d("MyLogs", "Error")
+                    Log.d("AuthLog", task.exception?.message.toString())
                     onComplete(false, task.exception?.message)
                 }
             }
     }
 
     fun loginUser(email: String, password: String, onComplete: (Boolean, String?) -> Unit) {
-
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     onComplete(true, "Вход выполнен успешно!")
-                    auth.currentUser?.let { Log.d("CurrentUser", it.uid) }
                 } else {
                     onComplete(false, task.exception?.message)
                 }

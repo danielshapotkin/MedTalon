@@ -22,6 +22,10 @@ class MedicalInstitutionsActivity : AppCompatActivity() {
         binding = ActivityMedicalInstitutionsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        homeViewModel.selectedRegion.observe(this) { region ->
+        binding.titleTw.text = "Медицинские учреждения\n $region"
+        }
+
         binding.backButton.setOnClickListener {
             finish()
         }
@@ -52,15 +56,15 @@ class MedicalInstitutionsActivity : AppCompatActivity() {
 
         dataBase.getPolyclinics { success, polyclinics, error ->
             if (success && polyclinics != null) {
-                updateListView(polyclinics)
+                val adapter = PolyclinicAdapter(this, polyclinics)
+                binding.medicalInstitutionsListView.adapter = adapter
             } else {
                 println("Ошибка при получении поликлиник: $error")
             }
         }
-    }
 
-    private fun updateListView(polyclinics: List<Polyclinic>) {
-        val adapter = PolyclinicAdapter(this, polyclinics)
-        binding.medicalInstitutionsListView.adapter = adapter
+        binding.searchButton.setOnClickListener{
+
+        }
     }
 }
