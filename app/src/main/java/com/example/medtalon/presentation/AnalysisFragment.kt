@@ -49,6 +49,20 @@ class AnalysisFragment : Fragment() {
             startActivity(intent)
         }
 
+        binding.choiceAnalysisButton.setOnClickListener{
+            val intent = Intent(requireContext(), ChoiceAnalysisActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.institutionsButton.setOnClickListener{
+            val intent = Intent(requireContext(), MedicalInstitutionsActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.myAnalysisButton.setOnClickListener{
+            val intent = Intent(requireContext(), MyAnalysisActivity::class.java)
+            startActivity(intent)
+        }
 
         return binding.root
     }

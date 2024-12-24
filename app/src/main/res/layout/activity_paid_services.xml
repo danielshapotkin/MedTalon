@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="@color/beige"
     tools:context="com.example.medtalon.presentation.MedicalInstitutionsActivity">
 
     <LinearLayout
@@ -45,17 +44,65 @@
             android:src="@drawable/profile_icon" />
     </LinearLayout>
 
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="357dp"
+        android:layout_height="166dp"
+        app:layout_constraintBottom_toTopOf="@id/indicator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/top_bar" />
+
+    <!-- TabLayout for page indicators -->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewPager"
+        app:tabIndicatorColor="@color/orange"
+        app:tabIndicatorHeight="4dp"
+        app:tabSelectedTextColor="@color/orange"
+        app:tabTextColor="@color/black" />
+
+    <EditText
+        android:id="@+id/search_editText"
+        android:layout_width="316dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/solid_and_stroke"
+        android:hint="Введите название учреждения"
+        android:paddingStart="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/indicator" />
+
+    <Button
+        android:id="@+id/search_button"
+        style="@style/orangeButton"
+        android:layout_width="44dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/solid_and_stroke"
+        android:drawableLeft="@drawable/search_icon"
+        android:padding="10dp"
+        app:layout_constraintStart_toEndOf="@+id/search_editText"
+        app:layout_constraintTop_toBottomOf="@+id/indicator" />
+
     <ListView
         android:id="@+id/paidServices_listView"
-        android:layout_width="350dp"
-        android:layout_height="780dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="353dp"
+        android:layout_height="500dp"
+        android:layout_marginTop="200dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/top_bar"
-        app:layout_constraintVertical_bias="0.027" />
+        app:layout_constraintVertical_bias="1.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context="com.example.medtalon.presentation.MedicalInstitutionsActivity">
+    tools:context="com.example.medtalon.presentation.ChoiceAnalysisActivity">
 
     <!-- Верхняя панель -->
     <LinearLayout
@@ -25,15 +25,15 @@
             android:contentDescription="Назад"
             android:src="@drawable/arrow_back" />
 
-        <!-- Заголовок -->
+        <!-- Заголовок "Заказ талона" -->
         <TextView
-            android:id="@+id/tw"
+            android:id="@+id/order_ticket_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Медучреждения"
-            android:textSize="16sp" />
+            android:text="Выбрать анализы"
+            android:textSize="16sp"/>
 
         <!-- Кнопка "Профиль" -->
         <ImageButton
@@ -46,11 +46,18 @@
     </LinearLayout>
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Заказ анализов"
+        app:layout_constraintBottom_toTopOf="@+id/title_tw"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
         android:id="@+id/title_tw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
-        android:text="Медицинские учреждения"
+        android:text="Выберите нужные вам анализы"
         android:textStyle="bold"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,7 +70,7 @@
         android:layout_height="46dp"
         android:layout_marginTop="28dp"
         android:background="@drawable/solid_and_stroke"
-        android:hint="Введите название учреждения"
+        android:hint="Название анализа"
         android:paddingStart="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_tw" />
@@ -82,52 +89,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_tw" />
 
-    <!-- Фильтр -->
-    <Spinner
-        android:id="@+id/filter_spinner"
-        android:layout_width="286dp"
-        android:layout_height="37dp"
-        android:layout_marginTop="40dp"
-        android:entries="@array/filter_options"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_editText" />
-
-
-    <ImageView
-        android:id="@+id/toMap_button"
-        android:layout_width="40dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="44dp"
-        app:layout_constraintStart_toEndOf="@+id/toList_button"
-        app:layout_constraintTop_toBottomOf="@+id/search_button"
-        app:srcCompat="@drawable/map_icon" />
-
-    <ImageView
-        android:id="@+id/toList_button"
-        android:layout_width="40dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="44dp"
-        app:layout_constraintStart_toEndOf="@+id/filter_spinner"
-        app:layout_constraintTop_toBottomOf="@+id/search_button"
-        app:srcCompat="@drawable/institutions_icon" />
-
     <ListView
-        android:id="@+id/medical_institutions_listView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="20dp"
+        android:id="@+id/analysis_listView"
+        android:layout_width="350dp"
+        android:layout_height="461dp"
         android:background="@drawable/card_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toMap_button" />
-
-    <org.osmdroid.views.MapView
-        android:id="@+id/mapView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@+id/filter_spinner"
-        tools:layout_editor_absoluteX="16dp" />
+        app:layout_constraintTop_toBottomOf="@+id/search_editText" />
 
 
 

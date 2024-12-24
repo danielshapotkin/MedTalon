@@ -4,18 +4,36 @@
     <!-- Разрешения -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name="com.example.medtalon.data.App"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/medical_services_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/medical_services_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.Test2"
         tools:targetApi="31">
+        <activity
+            android:name="com.example.medtalon.presentation.MyAnalysisActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.medtalon.presentation.ChoiceAnalysisActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.medtalon.presentation.DrugDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.medtalon.presentation.DrugActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.medtalon.presentation.PharmacyActivity"
+            android:exported="false" />
         <activity
             android:name="com.example.medtalon.presentation.PaidServicesActivity"
             android:exported="false" />
@@ -45,10 +63,14 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- Остальные Activity -->
+        </activity>
         <activity
             android:name="com.example.medtalon.presentation.LoginActivity"
             android:exported="false" />
+
+        <meta-data
+            android:name="org.osmdroid.CONFIG_FILE"
+            android:value="osmdroid/config" />
     </application>
 
 </manifest>

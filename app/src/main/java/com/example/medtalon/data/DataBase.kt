@@ -2,10 +2,12 @@ package com.example.medtalon.data
 
 import Polyclinic
 import android.util.Log
+import com.example.medtalon.domain.Analysis
 import com.example.medtalon.domain.Doctor
 import com.example.medtalon.domain.IDataBase
 import com.example.medtalon.domain.PaidService
 import com.example.medtalon.domain.User
+import com.example.medtalon.domain.UserInfo
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
@@ -112,32 +114,11 @@ class DataBase private constructor() : IDataBase {
             }
     }
 
-    fun getUserClinic(userId: String, onResult: (clinicName: String?) -> Unit) {
-        val db = FirebaseFirestore.getInstance()
-        val userRef = db.collection("Users").document(userId)
-
-        userRef.get().addOnSuccessListener { document ->
-            if (document.exists()) {
-                val clinicId = document.getString("clinicId")
-                if (clinicId != null) {
-                    // Получаем данные поликлиники
-                    db.collection("Polyclinics").document(clinicId).get()
-                        .addOnSuccessListener { clinicDoc ->
-                            val clinicName = clinicDoc.getString("name")
-                            onResult(clinicName)
-                        }
-                        .addOnFailureListener { e ->
-                            println("Ошибка при получении данных поликлиники: ${e.message}")
-                            onResult(null)
-                        }
-                } else {
-                    println("Пользователь не привязан к поликлинике.")
-                    onResult(null)
-                }
-            } else {
-                println("Пользователь не найден.")
-                onResult(null)
-            }
+    fun getUserClinic(login: String, onResult: (polyclinic: String?) -> Unit) {
+        val userCollection = firestore.collection("Users").document(login)
+        userCollection.get().addOnSuccessListener { document ->
+                val polyclinic = document.getString("polyclinic")
+                onResult(polyclinic)
         }.addOnFailureListener { e ->
             println("Ошибка при получении данных пользователя: ${e.message}")
             onResult(null)
@@ -195,13 +176,37 @@ class DataBase private constructor() : IDataBase {
         val userId = user.login
         val user = hashMapOf(
             "name" to user.name,
-            "surname" to user.surname,
             "polyclinic" to user.polyclinic,
-            "patronymic" to user.patronymic,
             "login" to user.login,
             "password" to user.password
         )
         firestore.collection("Users").document(userId).set(user)
+    }
+
+    suspend fun getUserByLogin(login: String): User? {
+        val documentSnapshot = firestore
+                .collection("Users")
+                .document(login)
+                .get()
+                .await() // Используем await для работы с корутинами
+         return documentSnapshot.toObject(User::class.java)
+    }
+
+    fun setAnalysis(currentUser: String, nameOfAnalysis: String) {
+            firestore
+                .collection("Users")
+                .document(currentUser)
+                .update("analysis", nameOfAnalysis)
+    }
+
+    suspend fun getAnalysis(currentUser: String): String?{
+        val documentSnapshot = firestore
+            .collection("Users")
+            .document(currentUser)
+            .get()
+            .await()
+
+       return documentSnapshot.getString("analysis")
     }
 }
 

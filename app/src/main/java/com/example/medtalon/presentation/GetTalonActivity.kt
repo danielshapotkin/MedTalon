@@ -107,9 +107,11 @@ class GetTalonActivity : AppCompatActivity() {
         binding.getTalonButton.setOnClickListener {
             val specialization = binding.specializationSpinner.selectedItem.toString()
             val doctor = binding.doctorSpinner.selectedItem.toString()
-            val date = binding.selectedDate.text
-            val time = binding.selectedTime.text
+            val date = binding.selectedDate.text.toString()
+            val time = binding.selectedTime.text.toString()
             binding.ticketDetails.text = "$specialization - $doctor - $date - $time"
+            dataBase.setTalon(date = date, time = time, doctor = doctor, polyclinic = "time"){isSuccess, error->
+            }
         }
     }
 

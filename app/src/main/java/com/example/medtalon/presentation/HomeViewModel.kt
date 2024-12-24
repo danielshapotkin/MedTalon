@@ -17,13 +17,22 @@ class HomeViewModel private constructor() {
     val events: LiveData<Events> get() = _events
     private val auth: Auth = Auth()
     private val dataBase: DataBase = DataBase.getInstance()
-    private val _selectedRegion = MutableLiveData<String>()
+    private val _selectedRegion = MutableLiveData<String>("Вся Беларусь")
     val selectedRegion: LiveData<String> get() = _selectedRegion
+    private val _selectedPolyclinic = MutableLiveData<String>("Поликлиника не выбрана")
+    val selectedPolyclinic: LiveData<String> get() = _selectedPolyclinic
+    private val _selectedPatient = MutableLiveData<String>("Пациент не добавлен")
+    val selectedPatient: LiveData<String> get() = _selectedPatient
 
     fun setSelectedRegion(region: String){
         _selectedRegion.value = region
     }
-
+    fun setSelectedPolyclinic(polyclinic: String){
+        _selectedPolyclinic.value = polyclinic
+    }
+    fun setSelectedPatient(name: String){
+        _selectedPatient.value = name
+    }
 
     init {
         val sharedPrefs = App.context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)

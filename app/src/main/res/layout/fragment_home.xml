@@ -82,6 +82,7 @@
                 android:padding="16dp">
 
                 <TextView
+                    android:id="@+id/patient_textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Медцентр пациента: Шапоткин Д.П."
@@ -89,6 +90,7 @@
                     android:textStyle="italic" />
 
                 <TextView
+                    android:id="@+id/polyclinic_textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="26-я городская поликлиника г.Минска"
@@ -96,8 +98,10 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/adress_textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:visibility="invisible"
                     android:text="г.Минск, ул. Кунцевщина, д.8"
                     android:textSize="14sp" />
 

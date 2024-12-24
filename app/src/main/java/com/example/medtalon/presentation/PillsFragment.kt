@@ -44,6 +44,15 @@ private val homeViewModel: HomeViewModel = HomeViewModel.getInstance()
             startActivity(intent)
         }
 
+        binding.pharmacyButton.setOnClickListener{
+            val intent = Intent(requireContext(), PharmacyActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.pillsBookButton.setOnClickListener{
+            val intent = Intent(requireContext(), DrugActivity::class.java)
+            startActivity(intent)
+        }
 
         return binding.root
     }

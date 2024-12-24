@@ -29,6 +29,15 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         homeViewModel.events.observe(viewLifecycleOwner, eventsListener)
 
+        homeViewModel.selectedPatient.observe(viewLifecycleOwner){ patient->
+            binding.patientTextView.text = patient
+        }
+
+        homeViewModel.selectedPolyclinic.observe(viewLifecycleOwner){ polyclinic->
+            binding.polyclinicTextView.text = polyclinic
+        }
+
+
         binding.getTalonButton.setOnClickListener {
             homeViewModel.getTalon()
         }
@@ -70,6 +79,8 @@ class HomeFragment : Fragment() {
             intent.data = Uri.parse(url)
             startActivity(intent)
         }
+
+
 
         return binding.root
     }

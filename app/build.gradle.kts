@@ -52,15 +52,14 @@ dependencies {
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.firebase.auth.ktx)
+    implementation(libs.play.services.maps)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
     implementation(platform("com.google.firebase:firebase-bom:31.3.0"))
     implementation("com.google.firebase:firebase-analytics-ktx:+")
     implementation("com.google.firebase:firebase-firestore-ktx:+")
     implementation("com.google.firebase:firebase-storage-ktx:+")
     implementation ("com.google.firebase:firebase-auth-ktx:+")
-
-
+    implementation ("org.osmdroid:osmdroid-android:6.1.1")
 }
