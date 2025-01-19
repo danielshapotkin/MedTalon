@@ -55,8 +55,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/top_bar" />
 
-    <EditText
-        android:id="@+id/polyclinicEditText"
+    <Spinner
+        android:id="@+id/polyclinic_spinner"
         android:layout_width="359dp"
         android:layout_height="61dp"
         android:layout_marginTop="36dp"
@@ -75,19 +75,28 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/polyclinicEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/polyclinic_spinner" />
 
     <TextView
-        android:id="@+id/show_more_text"
+        android:id="@+id/my_talons_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="56dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:text="Показать подробнее ▼"
-        android:textColor="@color/text_color_selector"
-        android:textSize="10sp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="24dp"
+        android:text="Мои талоны:"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameEditText" />
+
+    <TextView
+        android:id="@+id/talonsText_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="52dp"
+        android:text="Талонов нет"
+        android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameEditText" />
 
@@ -95,20 +104,23 @@
         android:id="@+id/hidden_polyclinicInfo_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Регистратура/вызов врача: +375 17 379-85-65\n\nПН-ПТ: 7:00-20:00\nСБ: 8:30-18:00"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="520dp"
+        android:text="Поликиники города Минска на карте: "
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/show_more_text" />
+        app:layout_constraintTop_toBottomOf="@+id/nameEditText" />
 
     <TextView
         android:id="@+id/hidden_email_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="🏠26poliklinika.by \n✉️doctor26gp@cu.bc.by"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:autoLink="web"
+        android:text="https://www.103.by/cat/med/polikliniki/"
+        android:textColorLink="@color/orange"
         android:textSize="14sp"
-        android:textColor="@color/orange"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/hidden_polyclinicInfo_textview" />
 

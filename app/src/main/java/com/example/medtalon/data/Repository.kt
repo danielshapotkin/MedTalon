@@ -39,9 +39,10 @@ class Repository(
         doctor: String,
         polyclinic: String,
         time: String,
+        currentUser: String,
         onComplete: (Boolean, String?) -> Unit
     ) {
-        dataBase.setTalon(date, doctor, polyclinic, time, onComplete)
+        dataBase.setTalon(date, doctor, polyclinic, time, currentUser, onComplete)
     }
 
     override suspend fun search(query: String): String {

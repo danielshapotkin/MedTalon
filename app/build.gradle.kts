@@ -62,4 +62,6 @@ dependencies {
     implementation("com.google.firebase:firebase-storage-ktx:+")
     implementation ("com.google.firebase:firebase-auth-ktx:+")
     implementation ("org.osmdroid:osmdroid-android:6.1.1")
+    implementation ("com.google.code.gson:gson:2.8.8")
+
 }

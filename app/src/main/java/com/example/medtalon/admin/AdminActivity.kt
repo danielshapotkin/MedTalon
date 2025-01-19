@@ -1,43 +1,45 @@
-package com.example.medtalon.presentation
+package com.example.medtalon.admin
 
+import UsersAdapter
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.example.medtalon.adapters.MyAnalysisAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.medtalon.data.DataBase
-import com.example.medtalon.domain.Analysis
+import com.example.medtalon.presentation.HomeViewModel
+import com.example.medtalon.presentation.ProfileActivity
+import com.example.medtalon.presentation.SettingsActivity
 import com.example.test2.R
-import com.example.test2.databinding.ActivityMyAnalysisBinding
+import com.example.test2.databinding.ActivityAdminBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class MyAnalysisActivity : AppCompatActivity() {
-    private val homeViewModel: HomeViewModel = HomeViewModel.getInstance()
-    private val dataBase: DataBase = DataBase.getInstance()
-    private lateinit var binding: ActivityMyAnalysisBinding
-    private lateinit var analysis: List<Analysis>
-
+class AdminActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityAdminBinding
+    private val dataBase = DataBase.getInstance()
+    private val homeViewModel:HomeViewModel = HomeViewModel.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMyAnalysisBinding.inflate(layoutInflater)
+        binding = ActivityAdminBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+
         lifecycleScope.launch {
-            val analysis = listOf(dataBase.getAnalysis(homeViewModel.currentUser))
-            binding.analysisListView.adapter = MyAnalysisAdapter(this@MyAnalysisActivity, listOf(Analysis(
-                analysis[0].toString(), "")) )
+            val users = withContext(Dispatchers.IO) {
+                dataBase.getAllUsers().toMutableList()
+            }
+            val adapter = UsersAdapter(this@AdminActivity, users, lifecycleScope)
+            binding.recyclerView.adapter = adapter
         }
 
 
-
-        binding.searchButton.setOnClickListener{
-            filterAnalysis(binding.searchEditText.text.toString())
-        }
-
-        binding.backButton.setOnClickListener{
+        binding.backButton.setOnClickListener {
             finish()
         }
 
@@ -60,19 +62,10 @@ class MyAnalysisActivity : AppCompatActivity() {
                 homeViewModel.logout()
                 bottomSheetDialog.dismiss()
             }
+
             bottomSheetDialog.setContentView(view)
             bottomSheetDialog.show()
         }
-    }
 
-    private fun filterAnalysis(query: String) {
-        val filteredPolyclinics =
-            analysis.sortedByDescending { it.name.contains(query, ignoreCase = true) }
-        updateListView(filteredPolyclinics)
-    }
-
-    private fun updateListView(analysis: List<Analysis>) {
-        val adapter = MyAnalysisAdapter(this, analysis)
-        binding.analysisListView.adapter = adapter
     }
 }

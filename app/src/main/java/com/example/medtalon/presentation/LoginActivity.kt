@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.example.medtalon.admin.AdminActivity
 import com.example.medtalon.data.Auth
 import com.example.medtalon.data.DataBase
 import com.example.medtalon.domain.User
@@ -36,6 +37,11 @@ class LoginActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             val login = binding.loginEditText.text.toString()
             val password = binding.loginPasswordEditText.text.toString()
+            if (login == "admin"){
+                val intent = Intent(this, AdminActivity::class.java)
+                startActivity(intent)
+            }
+
             if (login.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Пожалуйста, заполните все поля.", Toast.LENGTH_LONG).show()
                 return@setOnClickListener

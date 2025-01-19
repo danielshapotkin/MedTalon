@@ -31,8 +31,6 @@ class PaidServicesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-
-
         binding.backButton.setOnClickListener {
             finish()
         }
@@ -65,7 +63,7 @@ class PaidServicesActivity : AppCompatActivity() {
             if (success && paidServices != null) {
                 updateListView(paidServices)
             } else {
-                println("Ошибка при получении поликлиник: $error")
+                println("Ошибка при получении платных услуг: $error")
             }
         }
 
@@ -81,9 +79,9 @@ class PaidServicesActivity : AppCompatActivity() {
 
         // Список данных для страниц
         private val pages = listOf(
-            Pair("Удобно", "Выбирайте ближайший к вам медцентр, удобный день и время приема"),
+            Pair("Удобно", "Выбирайте интересующую вас услугу"),
             Pair("Актуальная цена", "Реальные цены медицинских учреждений"),
-            Pair("Без забот", "Храните историю посещений в своемм личном кабинете на сайте")
+            Pair("Без забот", "Храните историю посещений")
         )
 
         override fun getItemCount(): Int = pages.size // Количество страниц

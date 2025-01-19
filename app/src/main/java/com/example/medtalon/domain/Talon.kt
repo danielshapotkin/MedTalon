@@ -1,15 +1,17 @@
 package com.example.medtalon.domain
 
 data class Talon(
+    val date: String,
     val doctor: String,
-    val dateTime: String,
-    val service: String,
-    val price: Float
+    val polyclinic: String,
+    val time: String,
+    val userId: String
 ) {
     constructor() : this(
         "",
         "",
         "",
-        0F
+        "",
+        ""
     )
 }

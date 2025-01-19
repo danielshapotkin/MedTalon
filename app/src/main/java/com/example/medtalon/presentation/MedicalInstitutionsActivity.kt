@@ -63,6 +63,35 @@ class MedicalInstitutionsActivity : AppCompatActivity() {
             title = "25 Поликлиника"
         }
         mapView.overlays.add(marker25)
+        val marker2 = Marker(mapView).apply {
+            position = GeoPoint(53.891000, 27.566000)
+            title = "2 Поликлиника"
+        }
+        mapView.overlays.add(marker2)
+
+        val marker3 = Marker(mapView).apply {
+            position = GeoPoint(53.900000, 27.550000)
+            title = "3 Поликлиника"
+        }
+        mapView.overlays.add(marker3)
+
+        val marker4 = Marker(mapView).apply {
+            position = GeoPoint(53.920000, 27.580000)
+            title = "4 Поликлиника"
+        }
+        mapView.overlays.add(marker4)
+
+        val marker5 = Marker(mapView).apply {
+            position = GeoPoint(53.895000, 27.540000)
+            title = "5 Поликлиника"
+        }
+        mapView.overlays.add(marker5)
+
+        val marker6 = Marker(mapView).apply {
+            position = GeoPoint(53.875000, 27.560000)
+            title = "6 Поликлиника"
+        }
+        mapView.overlays.add(marker6)
 
         binding.toMapButton.setOnClickListener {
                 binding.medicalInstitutionsListView.visibility = View.GONE

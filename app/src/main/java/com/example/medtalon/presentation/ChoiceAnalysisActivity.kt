@@ -4,10 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.medtalon.adapters.AnalysisAdapter
-import com.example.medtalon.adapters.PolyclinicAdapter
+import com.example.medtalon.adapters.MyAnalysisAdapter
 import com.example.medtalon.domain.Analysis
 import com.example.test2.R
 import com.example.test2.databinding.ActivityChoiceAnalysisBinding

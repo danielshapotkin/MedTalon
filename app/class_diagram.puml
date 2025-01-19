@@ -1,0 +1,117 @@
+@startuml
+left to right direction
+
+' Основные классы
+class User {
+    + id: Int
+    + name: String
+    + login(): Boolean
+    + register(): Boolean
+}
+
+class TalonsFragment {
+    + displayAppointments(): Unit
+}
+
+class AnalysisFragment {
+    + displayAnalysisOptions(): Unit
+}
+
+class PillsFragment {
+    + displayPharmacies(): Unit
+}
+
+class BlogFragment {
+    + displayArticles(): Unit
+}
+
+class Doctor {
+    + id: Int
+    + name: String
+    + qualification: String
+    + schedule(): List<Appointment>
+}
+
+class Appointment {
+    + id: Int
+    + date: String
+    + time: String
+    + confirm(): Boolean
+}
+
+class Institution {
+    + id: Int
+    + name: String
+    + address: String
+    + region: String
+    + getDoctors(): List<Doctor>
+}
+
+class Region {
+    + id: Int
+    + name: String
+    + getInstitutions(): List<Institution>
+}
+
+class Blog {
+    + id: Int
+    + title: String
+    + getArticles(): List<Article>
+}
+
+class Article {
+    + id: Int
+    + title: String
+    + content: String
+    + category: String
+}
+
+class Pharmacy {
+    + id: Int
+    + name: String
+    + location: GeoPoint
+    + getAvailableMedicines(): List<Medicine>
+}
+
+class Medicine {
+    + id: Int
+    + name: String
+    + price: Float
+    + order(): Boolean
+}
+
+class Settings {
+    + id: Int
+    + notificationsEnabled: Boolean
+    + theme: String
+    + updatePreferences(): Boolean
+}
+
+class AnalysisOrder {
+    + id: Int
+    + analysisType: String
+    + date: Date
+    + submit(): Boolean
+}
+
+class PaidService {
+    + id: Int
+    + serviceName: String
+    + price: Float
+    + book(): Boolean
+}
+
+' Связи между классами
+User "1" -- "many" Appointment : "books"
+User "1" ..> TalonsFragment : "interacts with"
+User "1" ..> AnalysisFragment : "interacts with"
+User "1" ..> PillsFragment : "interacts with"
+User "1" ..> BlogFragment : "interacts with"
+Doctor "1" -- "many" Appointment : "has"
+Institution "1" -- "many" Doctor : "employs"
+Region "1" -- "many" Institution : "contains"
+Blog "1" -- "many" Article : "includes"
+User "1" -- "many" AnalysisOrder : "submits"
+User "1" -- "many" PaidService : "books"
+Pharmacy "1" -- "many" Medicine : "offers"
+@enduml

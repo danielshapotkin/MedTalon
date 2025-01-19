@@ -16,6 +16,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 class CallDoctorActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCallDoctorBinding
+    private val homeViewModel: HomeViewModel = HomeViewModel.getInstance()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,6 +59,10 @@ class CallDoctorActivity : AppCompatActivity() {
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse(url)
             startActivity(intent)
+        }
+
+        homeViewModel.selectedPolyclinic.observe(this){polyclinic->
+            binding.polyclinicEditText.text = polyclinic
         }
     }
 }

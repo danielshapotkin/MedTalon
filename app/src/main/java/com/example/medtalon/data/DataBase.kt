@@ -8,6 +8,7 @@ import com.example.medtalon.domain.IDataBase
 import com.example.medtalon.domain.PaidService
 import com.example.medtalon.domain.User
 import com.example.medtalon.domain.UserInfo
+import com.example.medtalon.presentation.HomeViewModel
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
@@ -37,21 +38,22 @@ class DataBase private constructor() : IDataBase {
         doctor: String,
         polyclinic: String,
         time: String,
+        userId: String,
         onComplete: (Boolean, String?) -> Unit
     ) {
         val talon = hashMapOf(
             "date" to date,
             "doctor" to doctor,
             "polyclinic" to polyclinic,
-            "time" to time
+            "time" to time,
+            "userId" to userId
         )
-        firestore.collection("Talons")
-            .add(talon)
+        firestore.collection("Talons").document().set(talon)
             .addOnSuccessListener {
-                onComplete(true, null) // Операция успешна
+                onComplete(true, null)
             }
             .addOnFailureListener { exception ->
-                onComplete(false, exception.message) // Ошибка при записи
+                onComplete(false, exception.message)
             }
     }
 
@@ -205,8 +207,37 @@ class DataBase private constructor() : IDataBase {
             .document(currentUser)
             .get()
             .await()
-
        return documentSnapshot.getString("analysis")
     }
+
+    suspend fun deleteUserByLogin(login: String): Boolean {
+        return try {
+            firestore
+                .collection("Users")
+                .document(login)
+                .delete()
+                .await() // Используем await для выполнения операции в корутине
+            true // Возвращаем true, если удаление прошло успешно
+        } catch (e: Exception) {
+            e.printStackTrace()
+            false // Возвращаем false в случае ошибки
+        }
+    }
+
+    suspend fun getAllUsers(): List<User> {
+        return try {
+            val querySnapshot = firestore
+                .collection("Users")
+                .get()
+                .await() // Ожидаем завершения асинхронной операции
+            querySnapshot.documents.mapNotNull { document ->
+                document.toObject(User::class.java)
+            } // Преобразуем документы в объекты User
+        } catch (e: Exception) {
+            e.printStackTrace()
+            emptyList() // Возвращаем пустой список в случае ошибки
+        }
+    }
+
 }
 

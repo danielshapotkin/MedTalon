@@ -10,7 +10,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.google.gms:google-services:4.4.2") // Указываем зависимость через classpath
+        classpath(libs.google.services) // Указываем зависимость через classpath
 
     }
 }

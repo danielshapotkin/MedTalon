@@ -8,8 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.test2.databinding.FragmentAnalysisBinding
-import com.example.test2.databinding.FragmentHomeBinding
 import com.example.test2.databinding.FragmentPillsBinding
 
 class PillsFragment : Fragment() {
@@ -28,6 +26,12 @@ private val homeViewModel: HomeViewModel = HomeViewModel.getInstance()
 
         binding.profileButton.setOnClickListener {
             homeViewModel.showProfile()
+        }
+
+        binding.searchButton.setOnClickListener{
+            val intent = Intent(requireContext(), PillsBookActivity::class.java)
+            intent.putExtra("query", binding.searchEditText.text.toString())
+            startActivity(intent)
         }
 
         binding.snoreTextView.setOnClickListener {
@@ -50,7 +54,7 @@ private val homeViewModel: HomeViewModel = HomeViewModel.getInstance()
         }
 
         binding.pillsBookButton.setOnClickListener{
-            val intent = Intent(requireContext(), DrugActivity::class.java)
+            val intent = Intent(requireContext(), PillsBookActivity::class.java)
             startActivity(intent)
         }
 

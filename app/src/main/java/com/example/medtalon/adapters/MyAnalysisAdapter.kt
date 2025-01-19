@@ -1,6 +1,5 @@
 package com.example.medtalon.adapters
 
-
 import com.example.medtalon.data.DataBase
 import com.example.medtalon.domain.Analysis
 import android.content.Context
@@ -14,14 +13,13 @@ import android.widget.Toast
 import com.example.medtalon.presentation.HomeViewModel
 import com.example.test2.R
 
-class AnalysisAdapter(context: Context, private val analysis: List<Analysis>) :
+class MyAnalysisAdapter(context: Context, private val analysis: List<Analysis>) :
     ArrayAdapter<Analysis>(context, 0, analysis) {
     private val dataBase: DataBase = DataBase.getInstance()
     private val homeViewModel: HomeViewModel = HomeViewModel.getInstance()
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val view =
-            convertView ?: LayoutInflater.from(context).inflate(R.layout.list_item, parent, false)
+        val view = convertView ?: LayoutInflater.from(context).inflate(R.layout.list_item, parent, false)
         val analysis = analysis[position]
 
         val nameTextView = view.findViewById<TextView>(R.id.polyclinic_name)
@@ -37,9 +35,9 @@ class AnalysisAdapter(context: Context, private val analysis: List<Analysis>) :
         addressTextView.text = ""
         urlTextView.text = ""
 
-        getTalonButton.text = "Заказать"
+        getTalonButton.text = "Заказано"
 
-        getTalonButton.setOnClickListener {
+        getTalonButton.setOnClickListener{
             dataBase.setAnalysis(homeViewModel.currentUser, analysis.name)
             Toast.makeText(context, "Анализ добавлен в профиль", Toast.LENGTH_LONG).show()
         }

@@ -104,14 +104,15 @@ class SearchResultActivity : AppCompatActivity(
             val date = binding.selectedDate.text.toString()
             val builder = AlertDialog.Builder(this)
             builder.setTitle("Заказ талона")
-            builder.setMessage("Вы записаны на прием $date в $time \n Варач $doctor")
+            builder.setMessage("Вы записаны на прием $date в $time \n Врач $doctor")
             builder.setPositiveButton("OK") { dialog, _ ->
                 CoroutineScope(Dispatchers.IO).launch {
                     repository.setTalon(
                         date = date,
                         doctor = doctor,
                         polyclinic = "",
-                        time = time
+                        time = time,
+                        currentUser = homeViewModel.currentUser
                     ) { success, message ->
                         if (success) {
                             println("Талон успешно добавлен!")
