@@ -23,13 +23,6 @@ class AnalysisFragment : Fragment() {
     ): View? {
         binding = FragmentAnalysisBinding.inflate(layoutInflater)
 
-        binding.regionButton.setOnClickListener {
-            homeViewModel.showRegions(requireView())
-        }
-
-        binding.profileButton.setOnClickListener {
-            homeViewModel.showProfile()
-        }
 
 
         binding.snoreTextView.setOnClickListener {

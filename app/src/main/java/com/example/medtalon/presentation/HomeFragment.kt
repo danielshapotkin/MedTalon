@@ -58,13 +58,6 @@ class HomeFragment : Fragment() {
             homeViewModel.showMedicalInstitutions()
         }
 
-        binding.regionButton.setOnClickListener {
-            homeViewModel.showRegions(requireView())
-        }
-
-        binding.profileButton.setOnClickListener {
-            homeViewModel.showProfile()
-        }
 
         binding.snoreTextView.setOnClickListener {
             val url = "https://medsi.ru/articles/khrap-prichiny-i-opasnosti/"
@@ -98,14 +91,7 @@ class HomeFragment : Fragment() {
                 }
 
                 is Events.Regions -> {
-                    val popupMenu = PopupMenu(requireContext(), binding.regionButton)
-                    popupMenu.menuInflater.inflate(R.menu.region_menu, popupMenu.menu)
-                    popupMenu.setOnMenuItemClickListener { item ->
-                        binding.regionButton.text = item.title
-                        homeViewModel.setSelectedRegion(item.title.toString())
-                        true
-                    }
-                    popupMenu.show()
+
                 }
 
                 Events.Talon -> {
@@ -137,27 +123,7 @@ class HomeFragment : Fragment() {
                 }
 
                 Events.Profile -> {
-                    val bottomSheetDialog = BottomSheetDialog(requireContext())
-                    val view = layoutInflater.inflate(R.layout.bottom_sheet_layout, null)
 
-                    view.findViewById<Button>(R.id.view_profile_button).setOnClickListener {
-                        val intent = Intent(requireContext(), ProfileActivity::class.java)
-                        startActivity(intent)
-                        bottomSheetDialog.dismiss()
-                    }
-
-                    view.findViewById<Button>(R.id.settings_button).setOnClickListener {
-                        val intent = Intent(requireContext(), SettingsActivity::class.java)
-                        startActivity(intent)
-                        bottomSheetDialog.dismiss()
-                    }
-
-                    view.findViewById<Button>(R.id.logout_button).setOnClickListener {
-                        homeViewModel.logout()
-                        bottomSheetDialog.dismiss()
-                    }
-                    bottomSheetDialog.setContentView(view)
-                    bottomSheetDialog.show()
                 }
             }
         }

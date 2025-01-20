@@ -37,31 +37,34 @@ class LoginActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             val login = binding.loginEditText.text.toString()
             val password = binding.loginPasswordEditText.text.toString()
-            if (login == "admin"){
+            if (login == "admin" || password == "admin"){
                 val intent = Intent(this, AdminActivity::class.java)
                 startActivity(intent)
             }
-
-            if (login.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Пожалуйста, заполните все поля.", Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
-            lifecycleScope.launch {
-                val user = dataBase.getUserByLogin(login)
-                if (user != null) {
-                    if (password == user.password) {
-                        homeViewModel.currentUser = login
-                        homeViewModel.isLogin = true
-                        finish()
+            else{
+                if (login.isEmpty() || password.isEmpty()) {
+                    Toast.makeText(this, "Пожалуйста, заполните все поля.", Toast.LENGTH_LONG).show()
+                    return@setOnClickListener
+                }
+                lifecycleScope.launch {
+                    val user = dataBase.getUserByLogin(login)
+                    if (user != null) {
+                        if (password == user.password) {
+                            homeViewModel.currentUser = login
+                            homeViewModel.isLogin = true
+                            finish()
+                        } else {
+                            Log.d("Login", "Неверный пароль для пользователя: $login")
+                            Toast.makeText(this@LoginActivity, "Неверный логин или пароль.", Toast.LENGTH_LONG).show()
+                        }
                     } else {
-                        Log.d("Login", "Неверный пароль для пользователя: $login")
+                        Log.d("Login", "Пользователь с логином $login не найден.")
                         Toast.makeText(this@LoginActivity, "Неверный логин или пароль.", Toast.LENGTH_LONG).show()
                     }
-                } else {
-                    Log.d("Login", "Пользователь с логином $login не найден.")
-                    Toast.makeText(this@LoginActivity, "Неверный логин или пароль.", Toast.LENGTH_LONG).show()
                 }
             }
+
+
         }
 
         binding.privacyPolicyText.setOnClickListener {

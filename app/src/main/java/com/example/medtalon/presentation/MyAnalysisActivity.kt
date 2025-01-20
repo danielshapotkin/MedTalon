@@ -17,7 +17,7 @@ class MyAnalysisActivity : AppCompatActivity() {
     private val homeViewModel: HomeViewModel = HomeViewModel.getInstance()
     private val dataBase: DataBase = DataBase.getInstance()
     private lateinit var binding: ActivityMyAnalysisBinding
-    private lateinit var analysis: List<Analysis>
+    private lateinit var analysis: List<String>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,18 +26,22 @@ class MyAnalysisActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         lifecycleScope.launch {
-            val analysis = listOf(dataBase.getAnalysis(homeViewModel.currentUser))
-            binding.analysisListView.adapter = MyAnalysisAdapter(this@MyAnalysisActivity, listOf(Analysis(
-                analysis[0].toString(), "")) )
+            val analysis = dataBase.getAnalysis(homeViewModel.currentUser)
+            if (analysis != null) {
+                this@MyAnalysisActivity.analysis = analysis
+            }
+            binding.analysisListView.adapter =
+                analysis?.let {
+                    MyAnalysisAdapter(this@MyAnalysisActivity, it)
+                }
         }
 
 
-
-        binding.searchButton.setOnClickListener{
+        binding.searchButton.setOnClickListener {
             filterAnalysis(binding.searchEditText.text.toString())
         }
 
-        binding.backButton.setOnClickListener{
+        binding.backButton.setOnClickListener {
             finish()
         }
 
@@ -66,12 +70,12 @@ class MyAnalysisActivity : AppCompatActivity() {
     }
 
     private fun filterAnalysis(query: String) {
-        val filteredPolyclinics =
-            analysis.sortedByDescending { it.name.contains(query, ignoreCase = true) }
-        updateListView(filteredPolyclinics)
+        val filteredAnalysis =
+            analysis.sortedByDescending { it.contains(query, ignoreCase = true) }
+        updateListView(filteredAnalysis)
     }
 
-    private fun updateListView(analysis: List<Analysis>) {
+    private fun updateListView(analysis: List<String>) {
         val adapter = MyAnalysisAdapter(this, analysis)
         binding.analysisListView.adapter = adapter
     }

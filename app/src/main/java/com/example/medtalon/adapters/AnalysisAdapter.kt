@@ -4,6 +4,7 @@ package com.example.medtalon.adapters
 import com.example.medtalon.data.DataBase
 import com.example.medtalon.domain.Analysis
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,10 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import com.example.medtalon.presentation.HomeViewModel
+import com.example.medtalon.web.UrlLoader
 import com.example.test2.R
 
 class AnalysisAdapter(context: Context, private val analysis: List<Analysis>) :
@@ -29,7 +33,7 @@ class AnalysisAdapter(context: Context, private val analysis: List<Analysis>) :
         val emailTextView = view.findViewById<TextView>(R.id.polyclinic_email)
         val addressTextView = view.findViewById<TextView>(R.id.polyclinic_adress)
         val urlTextView = view.findViewById<TextView>(R.id.polyclinic_url)
-        val getTalonButton = view.findViewById<Button>(R.id.getTalon_button)
+        val getAnalysis = view.findViewById<Button>(R.id.getTalon_button)
 
         nameTextView.text = analysis.name
         worktimeTextView.text = ""
@@ -37,11 +41,19 @@ class AnalysisAdapter(context: Context, private val analysis: List<Analysis>) :
         addressTextView.text = ""
         urlTextView.text = ""
 
-        getTalonButton.text = "Заказать"
+        getAnalysis.text = "Заказать"
 
-        getTalonButton.setOnClickListener {
+        getAnalysis.setOnClickListener {
+            // Добавление анализа в профиль
             dataBase.setAnalysis(homeViewModel.currentUser, analysis.name)
             Toast.makeText(context, "Анализ добавлен в профиль", Toast.LENGTH_LONG).show()
+
+            // Переход на URL
+            val url = "https://epos.hutkigrosh.by/pay/en/pay?param=17949-1-1"
+            val intent = Intent(context, UrlLoader::class.java).apply {
+                putExtra("url", url)
+            }
+            ContextCompat.startActivity(context, intent, null)
         }
 
         return view

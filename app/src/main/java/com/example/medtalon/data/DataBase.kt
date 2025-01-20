@@ -10,6 +10,7 @@ import com.example.medtalon.domain.User
 import com.example.medtalon.domain.UserInfo
 import com.example.medtalon.presentation.HomeViewModel
 import com.google.android.gms.tasks.Tasks
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.storage.FirebaseStorage
@@ -185,6 +186,8 @@ class DataBase private constructor() : IDataBase {
         firestore.collection("Users").document(userId).set(user)
     }
 
+
+
     suspend fun getUserByLogin(login: String): User? {
         val documentSnapshot = firestore
                 .collection("Users")
@@ -198,16 +201,16 @@ class DataBase private constructor() : IDataBase {
             firestore
                 .collection("Users")
                 .document(currentUser)
-                .update("analysis", nameOfAnalysis)
+                .update("analysis", FieldValue.arrayUnion(nameOfAnalysis))
     }
 
-    suspend fun getAnalysis(currentUser: String): String?{
+    suspend fun getAnalysis(currentUser: String): List<String>?{
         val documentSnapshot = firestore
             .collection("Users")
             .document(currentUser)
             .get()
             .await()
-       return documentSnapshot.getString("analysis")
+        return documentSnapshot.get("analysis") as? List<String>
     }
 
     suspend fun deleteUserByLogin(login: String): Boolean {

@@ -24,13 +24,7 @@ private val homeViewModel: HomeViewModel = HomeViewModel.getInstance()
         binding = FragmentBlogBinding.inflate(layoutInflater)
 
 
-        binding.regionButton.setOnClickListener {
-            homeViewModel.showRegions(requireView())
-        }
 
-        binding.profileButton.setOnClickListener {
-            homeViewModel.showProfile()
-        }
 
         binding.snoreTextView.setOnClickListener {
             val url = "https://medsi.ru/articles/khrap-prichiny-i-opasnosti/"

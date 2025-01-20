@@ -16,88 +16,69 @@ import org.osmdroid.views.overlay.Marker
 
 class PharmacyActivity : AppCompatActivity() {
     private val homeViewModel: HomeViewModel = HomeViewModel.getInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pharmacy)
+
+        // Применяем отступы для системы
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-            org.osmdroid.config.Configuration.getInstance().load(applicationContext, PreferenceManager.getDefaultSharedPreferences(applicationContext))
-            val mapView: MapView = findViewById(R.id.mapView)
-            mapView.setMultiTouchControls(true)
+        // Загружаем настройки для OpenStreetMap
+        org.osmdroid.config.Configuration.getInstance().load(applicationContext, PreferenceManager.getDefaultSharedPreferences(applicationContext))
 
-            val startPoint = GeoPoint(53.9006, 27.5590)
-            mapView.controller.setZoom(12.0)
-            mapView.controller.setCenter(startPoint)
+        // Инициализация карты
+        val mapView: MapView = findViewById(R.id.mapView)
+        mapView.setMultiTouchControls(true)
 
-        val marker1 = Marker(mapView).apply {
-            position = GeoPoint(53.918750, 27.598160)
-            title = "Государственная Аптека №1"
+        val startPoint = GeoPoint(53.9006, 27.5590)
+        mapView.controller.setZoom(12.0)
+        mapView.controller.setCenter(startPoint)
+
+        // Добавляем маркеры для аптек
+        val pharmacies = listOf(
+            GeoPoint(53.918750, 27.598160) to "Государственная Аптека №1",
+            GeoPoint(53.924000, 27.574000) to "Государственная Аптека №2",
+            GeoPoint(53.836600, 27.481200) to "Государственная Аптека №3",
+            GeoPoint(53.891600, 27.552300) to "Государственная Аптека №4",
+            GeoPoint(53.911000, 27.517800) to "Государственная Аптека №5",
+            GeoPoint(53.876400, 27.621200) to "Государственная Аптека №6",
+            GeoPoint(53.934500, 27.648700) to "Государственная Аптека №7",
+            GeoPoint(53.902300, 27.490200) to "Государственная Аптека №8",
+            GeoPoint(53.880900, 27.569500) to "Государственная Аптека №9",
+            GeoPoint(53.917700, 27.604000) to "Аптека №10",
+            GeoPoint(53.928750, 27.650300) to "Государственная Аптека №11",
+            GeoPoint(53.875600, 27.540700) to "Государственная Аптека №12",
+            GeoPoint(53.870100, 27.570900) to "Государственная Аптека №13",
+            GeoPoint(53.876700, 27.610400) to "Государственная Аптека №14",
+            GeoPoint(53.930000, 27.630000) to "Аптека №15",
+            GeoPoint(53.899000, 27.558800) to "Государственная Аптека №16",
+            GeoPoint(53.914500, 27.528900) to "Государственная Аптека №17",
+            GeoPoint(53.918300, 27.564500) to "Государственная Аптека №18",
+            GeoPoint(53.886400, 27.597800) to "Государственная Аптека №19",
+            GeoPoint(53.876800, 27.580300) to "Аптека №20"
+        )
+
+        // Добавляем маркеры на карту
+        pharmacies.forEach { (location, title) ->
+            val marker = Marker(mapView).apply {
+                position = location
+                this.title = title
+            }
+            mapView.overlays.add(marker)
         }
-        mapView.overlays.add(marker1)
 
-        val marker2 = Marker(mapView).apply {
-            position = GeoPoint(53.924000, 27.574000)
-            title = "Государственная Аптека №2"
-        }
-        mapView.overlays.add(marker2)
-
-        val marker3 = Marker(mapView).apply {
-            position = GeoPoint(53.836600, 27.481200)
-            title = "Государственная Аптека №3"
-        }
-        mapView.overlays.add(marker3)
-
-        val marker4 = Marker(mapView).apply {
-            position = GeoPoint(53.891600, 27.552300)
-            title = "Государственная Аптека №4"
-        }
-        mapView.overlays.add(marker4)
-
-        val marker5 = Marker(mapView).apply {
-            position = GeoPoint(53.911000, 27.517800)
-            title = "Государственная Аптека №5"
-        }
-        mapView.overlays.add(marker5)
-
-        val marker6 = Marker(mapView).apply {
-            position = GeoPoint(53.876400, 27.621200)
-            title = "Государственная Аптека №6"
-        }
-        mapView.overlays.add(marker6)
-
-        val marker7 = Marker(mapView).apply {
-            position = GeoPoint(53.934500, 27.648700)
-            title = "Государственная Аптека №7"
-        }
-        mapView.overlays.add(marker7)
-
-        val marker8 = Marker(mapView).apply {
-            position = GeoPoint(53.902300, 27.490200)
-            title = "Государственная Аптека №8"
-        }
-        mapView.overlays.add(marker8)
-
-        val marker9 = Marker(mapView).apply {
-            position = GeoPoint(53.880900, 27.569500)
-            title = "Государственная Аптека №9"
-        }
-        mapView.overlays.add(marker9)
-
-        val marker10 = Marker(mapView).apply {
-            position = GeoPoint(53.917700, 27.604000)
-            title = "Аптека №10"
-        }
-        mapView.overlays.add(marker10)
-
+        // Обработка кнопки назад
         val backButton = findViewById<ImageButton>(R.id.back_button)
-        backButton.setOnClickListener{
+        backButton.setOnClickListener {
             finish()
         }
 
+        // Обработка кнопки профиля
         val profileButton = findViewById<ImageButton>(R.id.profile_button)
         profileButton.setOnClickListener {
             val bottomSheetDialog = BottomSheetDialog(this)
@@ -121,6 +102,5 @@ class PharmacyActivity : AppCompatActivity() {
             bottomSheetDialog.setContentView(view)
             bottomSheetDialog.show()
         }
-
-        }
     }
+}

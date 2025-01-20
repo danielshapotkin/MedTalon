@@ -20,13 +20,6 @@ private val homeViewModel: HomeViewModel = HomeViewModel.getInstance()
     ): View? {
         binding = FragmentPillsBinding.inflate(layoutInflater)
 
-        binding.regionButton.setOnClickListener {
-            homeViewModel.showRegions(requireView())
-        }
-
-        binding.profileButton.setOnClickListener {
-            homeViewModel.showProfile()
-        }
 
         binding.searchButton.setOnClickListener{
             val intent = Intent(requireContext(), PillsBookActivity::class.java)
