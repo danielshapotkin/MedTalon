@@ -47,7 +47,7 @@ class ProfileActivity : AppCompatActivity() {
                     formattedTalons.append("-----------------------------\n")  // Добавляем разделитель между талонами
                 }
 
-                binding.talonsTextTextview.text = formattedTalons.toString()
+                binding.myTalonsTextview.text = formattedTalons.toString()
             }
             .addOnFailureListener { exception ->
                 println("Ошибка при получении талонов: ${exception.message}")
@@ -108,7 +108,6 @@ class ProfileActivity : AppCompatActivity() {
             "Поликлиника №39",
             "Поликлиника №40"
         )
-
 
         val talonAdapter = ArrayAdapter(
             this,

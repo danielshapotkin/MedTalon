@@ -11,14 +11,47 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.example.test2.R
+import com.example.test2.databinding.ActivitySettingsBinding
+import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class SettingsActivity : AppCompatActivity() {
 
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var binding: ActivitySettingsBinding
+    private val homeViewModel: HomeViewModel = HomeViewModel.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_settings)
+
+        binding.backButton.setOnClickListener {
+            finish()
+        }
+
+        binding.profileButton.setOnClickListener {
+            val bottomSheetDialog = BottomSheetDialog(this)
+            val view = layoutInflater.inflate(R.layout.bottom_sheet_layout, null)
+            view.findViewById<Button>(R.id.view_profile_button).setOnClickListener {
+                val intent = Intent(this, ProfileActivity::class.java)
+                startActivity(intent)
+                bottomSheetDialog.dismiss()
+            }
+
+            view.findViewById<Button>(R.id.settings_button).setOnClickListener {
+                val intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
+                bottomSheetDialog.dismiss()
+            }
+
+            view.findViewById<Button>(R.id.logout_button).setOnClickListener {
+                homeViewModel.logout()
+                bottomSheetDialog.dismiss()
+            }
+
+            bottomSheetDialog.setContentView(view)
+            bottomSheetDialog.show()
+        }
 
         sharedPreferences = getSharedPreferences("AppSettings", Context.MODE_PRIVATE)
 

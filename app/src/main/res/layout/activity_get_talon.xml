@@ -11,14 +11,7 @@
 
     <!-- Верхняя панель -->
 
-    <TextView
-        android:id="@+id/selectedTalon_tw"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Выбран талон:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/talons_spinner" />
+
 
     <Spinner
         android:id="@+id/talons_spinner"
@@ -140,29 +133,5 @@
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/doctor_spinner" />
-
-    <TextView
-        android:id="@+id/ticket_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Готовый талон"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/getTalon_button" />
-
-    <TextView
-        android:id="@+id/ticket_details"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/card_background"
-        android:padding="16dp"
-        android:text="Талон: Специализация - Врач - Дата - Время"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ticket_label" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

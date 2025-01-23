@@ -77,52 +77,46 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/polyclinic_spinner" />
 
-    <TextView
-        android:id="@+id/my_talons_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="24dp"
-        android:text="Мои талоны:"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameEditText" />
 
-    <TextView
-        android:id="@+id/talonsText_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="52dp"
-        android:text="Талонов нет"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameEditText" />
+    <ScrollView
+        android:layout_width="326dp"
+        android:layout_height="419dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@+id/hidden_polyclinicInfo_textview"
+        app:layout_constraintTop_toBottomOf="@+id/nameEditText"
+        tools:layout_editor_absoluteX="16dp">
+
+        <TextView
+            android:id="@+id/myTalonsTextview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:scrollbars="vertical"
+            android:textSize="16sp" />
+    </ScrollView>
 
     <TextView
         android:id="@+id/hidden_polyclinicInfo_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="428dp"
+        android:layout_marginBottom="1dp"
         android:text="Поликиники города Минска на карте: "
         android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameEditText" />
+        app:layout_constraintBottom_toTopOf="@+id/hidden_email_textview"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/hidden_email_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="4dp"
         android:autoLink="web"
         android:text="https://www.103.by/cat/med/polikliniki/"
         android:textColorLink="@color/orange"
         android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hidden_polyclinicInfo_textview" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

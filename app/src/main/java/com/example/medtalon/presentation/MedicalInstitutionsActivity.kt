@@ -40,58 +40,58 @@ class MedicalInstitutionsActivity : AppCompatActivity() {
         mapView.controller.setZoom(12.0)
         mapView.controller.setCenter(startPoint)
 
-        val marker = Marker(mapView).apply {
-            position = startPoint
-            title = "Минск"
-        }
-        mapView.overlays.add(marker)
+        val markerList = listOf(
+            GeoPoint(53.918750, 27.598160) to "24 Поликлиника",
+            GeoPoint(53.924000, 27.574000) to "1 Поликлиника",
+            GeoPoint(53.836600, 27.481200) to "25 Поликлиника",
+            GeoPoint(53.891000, 27.566000) to "2 Поликлиника",
+            GeoPoint(53.900000, 27.550000) to "3 Поликлиника",
+            GeoPoint(53.920000, 27.580000) to "4 Поликлиника",
+            GeoPoint(53.895000, 27.540000) to "5 Поликлиника",
+            GeoPoint(53.875000, 27.560000) to "6 Поликлиника",
+            GeoPoint(53.810000, 27.470000) to "7 Поликлиника",
+            GeoPoint(53.925000, 27.555000) to "8 Поликлиника",
+            GeoPoint(53.880000, 27.530000) to "9 Поликлиника",
+            GeoPoint(53.870000, 27.490000) to "10 Поликлиника",
+            GeoPoint(53.885000, 27.600000) to "11 Поликлиника",
+            GeoPoint(53.900500, 27.570000) to "12 Поликлиника",
+            GeoPoint(53.860000, 27.550000) to "13 Поликлиника",
+            GeoPoint(53.875500, 27.610000) to "14 Поликлиника",
+            GeoPoint(53.900200, 27.520000) to "15 Поликлиника",
+            GeoPoint(53.920500, 27.580500) to "16 Поликлиника",
+            GeoPoint(53.840000, 27.590000) to "17 Поликлиника",
+            GeoPoint(53.815000, 27.450000) to "18 Поликлиника",
+            GeoPoint(53.865000, 27.520000) to "19 Поликлиника",
+            GeoPoint(53.890000, 27.550000) to "20 Поликлиника",
+            GeoPoint(53.850000, 27.600000) to "21 Поликлиника",
+            GeoPoint(53.830000, 27.580000) to "22 Поликлиника",
+            GeoPoint(53.865500, 27.570000) to "23 Поликлиника",
+            GeoPoint(53.900100, 27.570500) to "26 Поликлиника",
+            GeoPoint(53.880500, 27.590500) to "27 Поликлиника",
+            GeoPoint(53.915000, 27.540000) to "28 Поликлиника",
+            GeoPoint(53.825000, 27.460000) to "29 Поликлиника",
+            GeoPoint(53.850500, 27.570500) to "30 Поликлиника",
+            GeoPoint(53.870200, 27.540500) to "31 Поликлиника",
+            GeoPoint(53.875000, 27.560500) to "32 Поликлиника",
+            GeoPoint(53.890200, 27.530500) to "33 Поликлиника",
+            GeoPoint(53.900800, 27.550500) to "34 Поликлиника",
+            GeoPoint(53.905000, 27.560000) to "35 Поликлиника",
+            GeoPoint(53.890100, 27.590500) to "36 Поликлиника",
+            GeoPoint(53.860500, 27.530500) to "37 Поликлиника",
+            GeoPoint(53.920000, 27.590000) to "38 Поликлиника",
+            GeoPoint(53.830500, 27.470500) to "39 Поликлиника",
+            GeoPoint(53.875500, 27.590500) to "40 Поликлиника"
+        )
 
-        val marker24 = Marker(mapView).apply {
-            position = GeoPoint(53.918750, 27.598160)
-            title = "24 Поликлиника"
+        markerList.forEach { (position, title) ->
+            val marker = Marker(mapView).apply {
+                this.position = position
+                this.title = title
+            }
+            mapView.overlays.add(marker)
         }
-        mapView.overlays.add(marker24)
 
-        val marker1 = Marker(mapView).apply {
-            position = GeoPoint(53.924000, 27.574000)
-            title = "1 Поликлиника"
-        }
-        mapView.overlays.add(marker1)
 
-        val marker25 = Marker(mapView).apply {
-            position = GeoPoint(53.836600, 27.481200)
-            title = "25 Поликлиника"
-        }
-        mapView.overlays.add(marker25)
-        val marker2 = Marker(mapView).apply {
-            position = GeoPoint(53.891000, 27.566000)
-            title = "2 Поликлиника"
-        }
-        mapView.overlays.add(marker2)
-
-        val marker3 = Marker(mapView).apply {
-            position = GeoPoint(53.900000, 27.550000)
-            title = "3 Поликлиника"
-        }
-        mapView.overlays.add(marker3)
-
-        val marker4 = Marker(mapView).apply {
-            position = GeoPoint(53.920000, 27.580000)
-            title = "4 Поликлиника"
-        }
-        mapView.overlays.add(marker4)
-
-        val marker5 = Marker(mapView).apply {
-            position = GeoPoint(53.895000, 27.540000)
-            title = "5 Поликлиника"
-        }
-        mapView.overlays.add(marker5)
-
-        val marker6 = Marker(mapView).apply {
-            position = GeoPoint(53.875000, 27.560000)
-            title = "6 Поликлиника"
-        }
-        mapView.overlays.add(marker6)
 
         binding.toMapButton.setOnClickListener {
                 binding.medicalInstitutionsListView.visibility = View.GONE

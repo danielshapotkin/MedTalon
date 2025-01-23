@@ -1,33 +1,21 @@
 package com.example.medtalon.presentation
 
-import android.app.DatePickerDialog
-import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
-import android.view.MenuInflater
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.LiveData
 import com.example.medtalon.data.DataBase
 import com.example.medtalon.domain.Doctor
 import com.example.test2.R
 import com.example.test2.databinding.ActivityGetTalonBinding
-import com.example.test2.databinding.ActivityMainBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.common.reflect.TypeToken
 import com.google.gson.Gson
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import java.util.Calendar
 
 
 class GetTalonActivity : AppCompatActivity() {
@@ -52,12 +40,6 @@ class GetTalonActivity : AppCompatActivity() {
         binding = ActivityGetTalonBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        doctorTalons = loadDoctorTalons()
-
-        setupUI()
-    }
-
-    private fun setupUI() {
         binding.backButton.setOnClickListener {
             finish()
         }
@@ -86,12 +68,22 @@ class GetTalonActivity : AppCompatActivity() {
             bottomSheetDialog.show()
         }
 
+        loadAndApdateupdateDoctorTalonsDate()
+
+
+        if (homeViewModel.isLogin) {
+            setupUI()
+        }
+    }
+
+    private fun setupUI() {
+
         binding.getTalonButton.setOnClickListener {
             val doctor = binding.doctorSpinner.selectedItem.toString()
             val talonDate = date
             val talonTime = time
 
-            if (talonDate.isNotEmpty() && talonTime.isNotEmpty()) {
+            if (date.isNotEmpty() && talonTime.isNotEmpty()) {
                 dataBase.setTalon(
                     date = talonDate,
                     time = talonTime,
@@ -196,6 +188,7 @@ class GetTalonActivity : AppCompatActivity() {
     private fun filterDoctorsBySpecialization(qualification: String) {
         dataBase.getDoctors { success, doctors, error ->
             if (success && doctors != null) {
+                println(doctors)
                 val filteredDoctors = doctors.filter { it.qualification == qualification }
                 updateDoctorsSpinner(filteredDoctors)
             } else {
@@ -217,7 +210,6 @@ class GetTalonActivity : AppCompatActivity() {
 
     private fun updateTalonsSpinnerForDoctor(doctor: String) {
         val talons = doctorTalons[doctor]?.toMutableList() ?: mutableListOf()
-
         // Create a custom onItemSelectedListener to handle talon selection
         val talonAdapter = ArrayAdapter(
             this,
@@ -273,6 +265,21 @@ class GetTalonActivity : AppCompatActivity() {
         } else {
             mutableMapOf() // Если данных нет, возвращаем пустую коллекцию
         }
+    }
+
+    fun loadAndApdateupdateDoctorTalonsDate() {
+        // Загружаем текущие данные
+        doctorTalons = loadDoctorTalons()
+
+        // Изменяем дату на 25.01.2025 для всех врачей
+        doctorTalons.forEach { (doctor, talons) ->
+            doctorTalons[doctor] = talons.map { talon ->
+                talon.replace("23.01.2025", "25.01.2025") // Замена даты
+            }.toMutableList()
+        }
+
+        // Сохраняем обновлённые данные
+        saveDoctorTalons()
     }
 }
 
