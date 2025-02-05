@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:background="@drawable/card_background">
+
+    <LinearLayout
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/polyclinic_name"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="Грушевская Любовь Васильевна"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/polyclinic_worktime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Терапевт" />
+
+    <TextView
+        android:id="@+id/polyclinic_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="18/11/2024" />
+
+    <TextView
+        android:id="@+id/polyclinic_adress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="11:30" />
+
+    <TextView
+        android:id="@+id/polyclinic_url"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="" />
+
+    <Button
+        android:id="@+id/getTalon_button"
+        style="@style/orangeButton"
+        android:layout_width="225dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/orange_button_background"
+        android:text="Оставить комментарий" />
+
+</LinearLayout>
+

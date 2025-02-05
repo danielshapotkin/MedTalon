@@ -59,6 +59,7 @@ class HomeViewModel private constructor() {
         object PayServices : Events()
         object Search : Events()
         object Profile : Events()
+        object Doctors : Events()
     }
 
     private fun saveLoginState(isLoggedIn: Boolean) {
@@ -103,5 +104,9 @@ class HomeViewModel private constructor() {
 
     fun showPaidServices() {
         _events.value = Events.PayServices
+    }
+
+    fun showDoctors(){
+        _events.value = Events.Doctors
     }
 }

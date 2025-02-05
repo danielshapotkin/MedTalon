@@ -27,7 +27,7 @@
             android:background="@android:color/transparent"
             android:drawableLeft="@drawable/map_icon"
             android:padding="5dp"
-            android:text="Вся Беларусь"
+            android:text="Минск"
             android:textColor="@color/orange"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -19,8 +19,6 @@ import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
 
 
-
-
 class MedicalInstitutionsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMedicalInstitutionsBinding
@@ -32,7 +30,10 @@ class MedicalInstitutionsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMedicalInstitutionsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        org.osmdroid.config.Configuration.getInstance().load(applicationContext, PreferenceManager.getDefaultSharedPreferences(applicationContext))
+        org.osmdroid.config.Configuration.getInstance().load(
+            applicationContext,
+            PreferenceManager.getDefaultSharedPreferences(applicationContext)
+        )
         val mapView: MapView = findViewById(R.id.mapView)
         mapView.setMultiTouchControls(true)
 
@@ -94,11 +95,11 @@ class MedicalInstitutionsActivity : AppCompatActivity() {
 
 
         binding.toMapButton.setOnClickListener {
-                binding.medicalInstitutionsListView.visibility = View.GONE
-                binding.mapView.visibility = View.VISIBLE
+            binding.medicalInstitutionsListView.visibility = View.GONE
+            binding.mapView.visibility = View.VISIBLE
         }
 
-        binding.toListButton.setOnClickListener{
+        binding.toListButton.setOnClickListener {
             binding.medicalInstitutionsListView.visibility = View.VISIBLE
             binding.mapView.visibility = View.GONE
         }
@@ -107,9 +108,9 @@ class MedicalInstitutionsActivity : AppCompatActivity() {
             binding.titleTw.text = "Медицинские учреждения\n $region"
         }
 
-       binding.backButton.setOnClickListener{
-           finish()
-       }
+        binding.backButton.setOnClickListener {
+            finish()
+        }
 
         binding.profileButton.setOnClickListener {
             val bottomSheetDialog = BottomSheetDialog(this)
@@ -137,7 +138,9 @@ class MedicalInstitutionsActivity : AppCompatActivity() {
         dataBase.getPolyclinics { success, polyclinics, error ->
             if (success && polyclinics != null) {
                 this.polyclinics = polyclinics
+                val query = intent.getStringExtra("QUERY")
                 updateListView(polyclinics)
+                query?.let { filterPolyclinics(it) }
             } else {
                 println("Ошибка при получении поликлиник: $error")
             }
@@ -146,8 +149,9 @@ class MedicalInstitutionsActivity : AppCompatActivity() {
         binding.searchButton.setOnClickListener {
             filterPolyclinics(binding.searchEditText.text.toString())
         }
-    }
 
+
+    }
 
 
     private fun updateListView(polyclinics: List<Polyclinic>) {

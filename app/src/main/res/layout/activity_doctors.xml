@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Платные услуги"
+            android:text="Доктора"
             android:textSize="16sp"/>
 
         <!-- Кнопка "Профиль" -->
@@ -45,64 +45,45 @@
     </LinearLayout>
 
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPager"
-        android:layout_width="357dp"
-        android:layout_height="166dp"
-        app:layout_constraintBottom_toTopOf="@id/indicator"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/top_bar" />
-
     <!-- TabLayout for page indicators -->
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/indicator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewPager"
-        app:tabIndicatorColor="@color/orange"
-        app:tabIndicatorHeight="4dp"
-        app:tabSelectedTextColor="@color/orange"
-        app:tabTextColor="@color/black" />
 
     <EditText
         android:id="@+id/search_editText"
-        android:layout_width="316dp"
+        android:layout_width="311dp"
         android:layout_height="46dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/solid_and_stroke"
-        android:hint="Введите название"
+        android:hint="Введите доктора"
         android:paddingStart="12dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/indicator" />
+        app:layout_constraintTop_toBottomOf="@+id/top_bar" />
+
 
     <Button
         android:id="@+id/search_button"
         style="@style/orangeButton"
         android:layout_width="44dp"
         android:layout_height="47dp"
-        android:layout_marginTop="8dp"
         android:background="@drawable/solid_and_stroke"
         android:drawableLeft="@drawable/search_icon"
         android:padding="10dp"
-        app:layout_constraintStart_toEndOf="@+id/search_editText"
-        app:layout_constraintTop_toBottomOf="@+id/indicator" />
+        app:layout_constraintBottom_toBottomOf="@+id/search_editText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/search_editText" />
 
     <ListView
-        android:id="@+id/paidServices_listView"
-        android:layout_width="353dp"
-        android:layout_height="500dp"
-        android:layout_marginTop="200dp"
+        android:id="@+id/doctors_listView"
+        android:layout_width="364dp"
+        android:layout_height="730dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/top_bar"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/search_editText"
+        app:layout_constraintVertical_bias="0.0" />
+    />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

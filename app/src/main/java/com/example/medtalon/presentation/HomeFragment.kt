@@ -58,6 +58,9 @@ class HomeFragment : Fragment() {
             homeViewModel.showMedicalInstitutions()
         }
 
+        binding.doctorsButton.setOnClickListener{
+            homeViewModel.showDoctors()
+        }
 
         binding.snoreTextView.setOnClickListener {
             val url = "https://medsi.ru/articles/khrap-prichiny-i-opasnosti/"
@@ -90,10 +93,6 @@ class HomeFragment : Fragment() {
                     startActivity(intent)
                 }
 
-                is Events.Regions -> {
-
-                }
-
                 Events.Talon -> {
                     val intent = Intent(requireContext(), GetTalonActivity::class.java)
                     startActivity(intent)
@@ -116,14 +115,23 @@ class HomeFragment : Fragment() {
 
                 Events.Search -> {
                     val query = binding.searchEditText.text.toString()
-                    val intent = Intent(requireContext(), SearchResultActivity::class.java).apply {
+                    val intent = Intent(requireContext(), MedicalInstitutionsActivity::class.java).apply {
                         putExtra("QUERY", query)
                     }
                     startActivity(intent)
                 }
 
-                Events.Profile -> {
+                Events.Profile -> TODO()
+                is Events.Regions -> TODO()
 
+                Events.Doctor->{
+                    val intent = Intent(requireContext(), CallDoctorActivity::class.java)
+                    startActivity(intent)
+                }
+
+                Events.Doctors -> {
+                    val intent = Intent(requireContext(), DoctorsActivity::class.java)
+                    startActivity(intent)
                 }
             }
         }

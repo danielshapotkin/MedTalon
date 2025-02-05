@@ -1,7 +1,10 @@
 package com.example.medtalon.data
 
 import Polyclinic
+import android.app.AlertDialog
 import android.util.Log
+import android.widget.Toast
+import com.example.medtalon.data.App.Companion.context
 import com.example.medtalon.domain.Analysis
 import com.example.medtalon.domain.Doctor
 import com.example.medtalon.domain.IDataBase
@@ -15,6 +18,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.tasks.await
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class DataBase private constructor() : IDataBase {
 
@@ -120,8 +126,8 @@ class DataBase private constructor() : IDataBase {
     fun getUserClinic(login: String, onResult: (polyclinic: String?) -> Unit) {
         val userCollection = firestore.collection("Users").document(login)
         userCollection.get().addOnSuccessListener { document ->
-                val polyclinic = document.getString("polyclinic")
-                onResult(polyclinic)
+            val polyclinic = document.getString("polyclinic")
+            onResult(polyclinic)
         }.addOnFailureListener { e ->
             println("Ошибка при получении данных пользователя: ${e.message}")
             onResult(null)
@@ -133,9 +139,10 @@ class DataBase private constructor() : IDataBase {
             .get()
             .addOnSuccessListener { querySnapshot ->
                 if (!querySnapshot.isEmpty) {
-                    val doctors = querySnapshot.documents.map { document ->
-                        document.toObject(Doctor::class.java)
-                    }.filterNotNull() // Отфильтровываем null-значения
+                    val doctors = querySnapshot.documents.mapNotNull { document ->
+                        val doctor = document.toObject(Doctor::class.java)
+                        doctor?.copy(id = document.id) // Добавляем id из Firestore
+                    }
 
                     onComplete(true, doctors, null)
                 } else {
@@ -175,7 +182,7 @@ class DataBase private constructor() : IDataBase {
         return Triple(polyclinics, paidServices, doctors)
     }
 
-    fun setUser (user: User){
+    fun setUser(user: User) {
         val userId = user.login
         val user = hashMapOf(
             "name" to user.name,
@@ -187,24 +194,23 @@ class DataBase private constructor() : IDataBase {
     }
 
 
-
     suspend fun getUserByLogin(login: String): User? {
         val documentSnapshot = firestore
-                .collection("Users")
-                .document(login)
-                .get()
-                .await() // Используем await для работы с корутинами
-         return documentSnapshot.toObject(User::class.java)
+            .collection("Users")
+            .document(login)
+            .get()
+            .await() // Используем await для работы с корутинами
+        return documentSnapshot.toObject(User::class.java)
     }
 
     fun setAnalysis(currentUser: String, nameOfAnalysis: String) {
-            firestore
-                .collection("Users")
-                .document(currentUser)
-                .update("analysis", FieldValue.arrayUnion(nameOfAnalysis))
+        firestore
+            .collection("Users")
+            .document(currentUser)
+            .update("analysis", FieldValue.arrayUnion(nameOfAnalysis))
     }
 
-    suspend fun getAnalysis(currentUser: String): List<String>?{
+    suspend fun getAnalysis(currentUser: String): List<String>? {
         val documentSnapshot = firestore
             .collection("Users")
             .document(currentUser)
@@ -242,5 +248,34 @@ class DataBase private constructor() : IDataBase {
         }
     }
 
+    fun saveComment(doctorId: String, comment: String) {
+        val commentsRef = firestore.collection("Doctors").document(doctorId).collection("comments")
+        val commentData = hashMapOf(
+            "text" to comment,
+            "timestamp" to SimpleDateFormat(
+                "yyyy-MM-dd HH:mm:ss",
+                Locale.getDefault()
+            ).format(Date())
+        )
+
+        commentsRef.add(commentData)
+            .addOnSuccessListener {
+                Toast.makeText(context, "Комментарий добавлен", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(context, "Ошибка: ${e.message}", Toast.LENGTH_LONG).show()
+            }
+    }
+
+    suspend fun loadComments(doctorId: String): List<String> {
+        return try {
+            val snapshot =
+                firestore.collection("Doctors").document(doctorId).collection("comments").get()
+                    .await()
+            snapshot.documents.mapNotNull { it.getString("text") }
+        } catch (e: Exception) {
+            emptyList()
+        }
+    }
 }
 

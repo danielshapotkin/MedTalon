@@ -24,43 +24,43 @@
             app:layout_constraintTop_toTopOf="parent">
 
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+            <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="50dp"-->
+            <!--                android:orientation="horizontal"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="parent">-->
 
-                <Button
-                    android:id="@+id/region_button"
-                    android:layout_width="140dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="10dp"
-                    android:background="@android:color/transparent"
-                    android:drawableLeft="@drawable/map_icon"
-                    android:padding="5dp"
-                    android:text="Минск"
-                    android:textColor="@color/orange"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <!--                <Button-->
+            <!--                    android:id="@+id/region_button"-->
+            <!--                    android:layout_width="140dp"-->
+            <!--                    android:layout_height="50dp"-->
+            <!--                    android:layout_marginStart="10dp"-->
+            <!--                    android:background="@android:color/transparent"-->
+            <!--                    android:drawableLeft="@drawable/map_icon"-->
+            <!--                    android:padding="5dp"-->
+            <!--                    android:text="Минск"-->
+            <!--                    android:textColor="@color/orange"-->
+            <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                    app:layout_constraintStart_toStartOf="parent"-->
+            <!--                    app:layout_constraintTop_toTopOf="parent" />-->
 
-                <Button
-                    android:id="@+id/profile_button"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="16dp"
-                    android:background="@android:color/transparent"
-                    android:drawableLeft="@drawable/profile_icon"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0" />
+            <!--                <Button-->
+            <!--                    android:id="@+id/profile_button"-->
+            <!--                    android:layout_width="50dp"-->
+            <!--                    android:layout_height="50dp"-->
+            <!--                    android:layout_marginTop="4dp"-->
+            <!--                    android:layout_marginEnd="16dp"-->
+            <!--                    android:background="@android:color/transparent"-->
+            <!--                    android:drawableLeft="@drawable/profile_icon"-->
+            <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                    app:layout_constraintTop_toTopOf="parent"-->
+            <!--                    app:layout_constraintVertical_bias="0.0" />-->
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
 
             <TextView
                 android:id="@+id/header_textview"
@@ -101,9 +101,9 @@
                     android:id="@+id/adress_textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="invisible"
                     android:text="г.Минск, ул. Кунцевщина, д.8"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:visibility="invisible" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -116,10 +116,10 @@
 
                     <Button
                         android:id="@+id/getTalon_button"
+                        style="@style/orangeButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="18dp"
-                        style="@style/orangeButton"
                         android:background="@drawable/orange_button_background"
                         android:text="Заказать талон" />
 
@@ -143,6 +143,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <ImageView
+                    android:id="@+id/doctors_button"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="252dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/arrow_icon"
+                    app:layout_constraintStart_toEndOf="@+id/doctors_textView"
+                    app:layout_constraintTop_toBottomOf="@+id/line_view2" />
+
+                <ImageView
+                    android:id="@+id/institutions_imageView"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="12dp"
+                    android:src="@drawable/pay_icon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/line_view" />
+
                 <EditText
                     android:id="@+id/search_editText"
                     android:layout_width="363dp"
@@ -150,7 +170,7 @@
                     android:layout_marginStart="2dp"
                     android:height="40dp"
                     android:background="@drawable/solid_and_stroke"
-                    android:hint="Поиск услуги, врача, учреждения"
+                    android:hint="Поиск медучреждения"
                     android:paddingStart="12dp"
                     android:textAppearance="@style/HintTextStyle"
                     app:layout_constraintStart_toStartOf="parent"
@@ -182,14 +202,14 @@
                     app:layout_constraintTop_toBottomOf="@+id/search_editText" />
 
                 <ImageView
-                    android:id="@+id/institutions_imageView"
+                    android:id="@+id/doctors_imageView"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="92dp"
-                    android:src="@drawable/pay_icon"
+                    android:layout_marginTop="12dp"
+                    android:src="@drawable/doctors_icon"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/search_editText" />
+                    app:layout_constraintTop_toBottomOf="@+id/line_view2" />
 
                 <TextView
                     android:id="@+id/choiceAnalysis_textView"
@@ -242,12 +262,23 @@
                     app:layout_constraintTop_toBottomOf="@+id/choiceAnalysis_textView"
                     tools:layout_editor_absoluteX="10dp" />
 
+                <View
+                    android:id="@+id/line_view2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="#000000"
+                    app:layout_constraintTop_toBottomOf="@+id/institutions_textview"
+                    tools:layout_editor_absoluteX="10dp" />
+
                 <TextView
                     android:id="@+id/blog_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="48dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="112dp"
                     android:text="Медицинский блог"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -274,16 +305,15 @@
                         android:padding="8dp"
                         android:text="Чем опасен храп и как от него избавиться?"
                         android:textColor="@color/blue"
-                        android:textSize="16sp"
-                        />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="8dp"
-                        android:textStyle="italic"
                         android:text="Анастасия Шунто       👁5516"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:textStyle="italic" />
 
                     <TextView
                         android:id="@+id/eyesInfo_textView"
@@ -292,8 +322,7 @@
                         android:padding="8dp"
                         android:text="Круги и мешки под глазами: почему возникают и как убрать?"
                         android:textColor="@color/blue"
-                        android:textSize="16sp"
-                        />
+                        android:textSize="16sp" />
                     />
 
                     <TextView
@@ -302,10 +331,20 @@
                         android:padding="8dp"
                         android:text="Катерина Киселева        👁3986"
                         android:textSize="14sp"
-                        android:textStyle="italic"/>
+                        android:textStyle="italic" />
 
 
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/doctors_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Доктора"
+                    app:layout_constraintStart_toEndOf="@+id/doctors_imageView"
+                    app:layout_constraintTop_toBottomOf="@+id/line_view2" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

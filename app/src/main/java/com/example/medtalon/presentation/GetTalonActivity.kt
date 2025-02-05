@@ -274,7 +274,7 @@ class GetTalonActivity : AppCompatActivity() {
         // Изменяем дату на 25.01.2025 для всех врачей
         doctorTalons.forEach { (doctor, talons) ->
             doctorTalons[doctor] = talons.map { talon ->
-                talon.replace("23.01.2025", "25.01.2025") // Замена даты
+                talon.replace("26.01.2025", "01.02.2025") // Замена даты
             }.toMutableList()
         }
 
