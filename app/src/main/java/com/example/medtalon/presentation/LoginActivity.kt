@@ -7,10 +7,10 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.example.medtalon.admin.AdminActivity
 import com.example.medtalon.data.Auth
 import com.example.medtalon.data.DataBase
 import com.example.medtalon.domain.User
+import com.example.medtalon.web.UrlLoader
 import com.example.test2.databinding.ActivityLoginBinding
 import kotlinx.coroutines.launch
 
@@ -32,13 +32,22 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
             dataBase.setUser(User("", login, password, ""))
+            binding.viewFlipper.showNext()
+            binding.tvToggleLoginRegister.text = if (binding.viewFlipper.displayedChild == 0) {
+                "Еще нет аккаунта? Зарегистрироваться"
+            } else {
+                "Уже есть аккаунт? Войти в существующий"
+            }
         }
 
         binding.btnLogin.setOnClickListener {
             val login = binding.loginEditText.text.toString()
             val password = binding.loginPasswordEditText.text.toString()
             if (login == "admin" || password == "admin"){
-                val intent = Intent(this, AdminActivity::class.java)
+                val intent = Intent(this, UrlLoader::class.java).apply {
+                    val url = "https://console.firebase.google.com/project/test2-79b97/firestore/databases/-default-/data/~2FUsers~2F1111"
+                    putExtra("url", url)
+                }
                 startActivity(intent)
             }
             else{

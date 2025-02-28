@@ -101,10 +101,7 @@ class DoctorsAdapter(context: Context, private val doctors: List<Doctor>) :
             positiveButton.setTextColor(context.resources.getColor(android.R.color.black))  // Черный цвет
         }
 
-        dialog.setOnShowListener {
-            val negativeButton = dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
-            negativeButton.setTextColor(context.resources.getColor(android.R.color.black))  // Черный цвет
-        }
+
 
         dialog.show()
     }

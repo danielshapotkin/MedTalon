@@ -25,7 +25,7 @@
             android:contentDescription="Назад"
             android:src="@drawable/arrow_back" />
 
-        <!-- Заголовок "Заказ талона" -->
+        <!-- Заголовок "Выбрать анализы" -->
         <TextView
             android:id="@+id/order_ticket_title"
             android:layout_width="0dp"

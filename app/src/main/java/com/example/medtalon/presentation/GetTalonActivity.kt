@@ -1,6 +1,11 @@
 package com.example.medtalon.presentation
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -9,6 +14,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
 import com.example.medtalon.data.DataBase
 import com.example.medtalon.domain.Doctor
 import com.example.test2.R
@@ -25,7 +31,7 @@ class GetTalonActivity : AppCompatActivity() {
     private var date = ""
     private var time = ""
 
-    private val specializations = listOf(
+    private var specializations = listOf(
         "Терапевт",
         "Хирург",
         "Кардиолог",
@@ -92,6 +98,7 @@ class GetTalonActivity : AppCompatActivity() {
                     userId = homeViewModel.currentUser
                 ) { isSuccess, error ->
                     if (isSuccess) {
+                        sendAppointmentNotification(doctor, date, time)
                         val builder = AlertDialog.Builder(this)
                         builder.setTitle("Заказ талона")
                         builder.setMessage("Вы записаны на прием $talonDate в $talonTime \n Врач: $doctor")
@@ -127,6 +134,11 @@ class GetTalonActivity : AppCompatActivity() {
     }
 
     private fun setupSpecializationsSpinner() {
+        when (homeViewModel.selectedPolyclinic.value){
+            "Поликлиника №2" -> specializations= listOf("Терапевт", "Хирург", "Кардиолог")
+            "Поликлиника №7" -> specializations= listOf("Невролог", "Хирург", "Кардиолог")
+            "Поликлиника №4" -> specializations= listOf("Кардиолог", "Педиатр", "Невролог")
+        }
         val specializationAdapter = ArrayAdapter(
             this,
             android.R.layout.simple_spinner_item,
@@ -271,15 +283,49 @@ class GetTalonActivity : AppCompatActivity() {
         // Загружаем текущие данные
         doctorTalons = loadDoctorTalons()
 
-        // Изменяем дату на 25.01.2025 для всех врачей
+        // Изменяем дату талона для всех врачей
         doctorTalons.forEach { (doctor, talons) ->
             doctorTalons[doctor] = talons.map { talon ->
-                talon.replace("26.01.2025", "01.02.2025") // Замена даты
+                talon.replace("27.02.2025", "28.02.2025") // Замена даты
             }.toMutableList()
         }
 
         // Сохраняем обновлённые данные
         saveDoctorTalons()
+    }
+
+    private fun sendAppointmentNotification(doctor: String, date: String, time: String) {
+        val channelId = "appointment_channel"
+        val notificationId = 1
+
+        // Создание канала уведомлений для Android 8.0+
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                channelId,
+                "Запись на прием",
+                NotificationManager.IMPORTANCE_HIGH
+            )
+            notificationManager.createNotificationChannel(channel)
+        }
+
+        // Интент для открытия приложения по клику на уведомление
+        val intent = Intent(this, ProfileActivity::class.java)
+        val pendingIntent = PendingIntent.getActivity(
+            this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        // Создание уведомления
+        val notification = NotificationCompat.Builder(this, channelId)
+            .setSmallIcon(R.drawable.pills_icon) // Иконка уведомления
+            .setContentTitle("Вы записаны на прием")
+            .setContentText("Дата: $date, Время: $time, Врач: $doctor")
+            .setAutoCancel(true)
+            .setContentIntent(pendingIntent)
+            .build()
+
+        // Отправка уведомления
+        notificationManager.notify(notificationId, notification)
     }
 }
 

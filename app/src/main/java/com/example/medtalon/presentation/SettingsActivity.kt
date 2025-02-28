@@ -56,13 +56,13 @@ class SettingsActivity : AppCompatActivity() {
         sharedPreferences = getSharedPreferences("AppSettings", Context.MODE_PRIVATE)
 
         val notificationsButton = findViewById<Button>(R.id.notifications_button)
-        val languageButton = findViewById<Button>(R.id.language_button)
+        //val languageButton = findViewById<Button>(R.id.language_button)
         val themeButton = findViewById<Button>(R.id.theme_button)
         val privacyPolicyButton = findViewById<Button>(R.id.privacyPolicyButton)
         val logoutButton = findViewById<Button>(R.id.logout_button)
 
         notificationsButton.setOnClickListener { openNotificationsSettings() }
-        languageButton.setOnClickListener { openLanguageSettings() }
+        //languageButton.setOnClickListener { openLanguageSettings() }
         themeButton.setOnClickListener { openThemeSettings() }
         privacyPolicyButton.setOnClickListener { openPrivacyPolicy() }
         logoutButton.setOnClickListener { logoutUser() }

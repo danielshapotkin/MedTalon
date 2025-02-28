@@ -71,18 +71,20 @@ class DoctorsActivity : AppCompatActivity() {
         }
 
         showLoadingDialog()
-        lifecycleScope.launch {
+        lifecycleScope.launch(Dispatchers.IO) {
             dataBase.getDoctors { success, doctors, error ->
                 hideLoadingDialog()
-                if (success && doctors != null) {
-                    this@DoctorsActivity.doctors = doctors
-                    binding.doctorsListView.adapter = DoctorsAdapter(this@DoctorsActivity, doctors)
-                } else {
-                    Toast.makeText(
-                        this@DoctorsActivity,
-                        "Ошибка загрузки врачей: $error",
-                        Toast.LENGTH_LONG
-                    ).show()
+                runOnUiThread {
+                    if (success && doctors != null) {
+                        this@DoctorsActivity.doctors = doctors
+                        binding.doctorsListView.adapter = DoctorsAdapter(this@DoctorsActivity, doctors)
+                    } else {
+                        Toast.makeText(
+                            this@DoctorsActivity,
+                            "Ошибка загрузки врачей: $error",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
                 }
             }
         }

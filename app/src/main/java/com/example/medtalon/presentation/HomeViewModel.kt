@@ -17,7 +17,7 @@ class HomeViewModel private constructor() {
     val events: LiveData<Events> get() = _events
     private val auth: Auth = Auth()
     private val dataBase: DataBase = DataBase.getInstance()
-    private val _selectedRegion = MutableLiveData<String>("Вся Беларусь")
+    private val _selectedRegion = MutableLiveData<String>("Минск")
     val selectedRegion: LiveData<String> get() = _selectedRegion
     private val _selectedPolyclinic = MutableLiveData<String>("Поликлиника не выбрана")
     val selectedPolyclinic: LiveData<String> get() = _selectedPolyclinic

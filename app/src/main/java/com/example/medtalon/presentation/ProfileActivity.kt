@@ -109,13 +109,13 @@ class ProfileActivity : AppCompatActivity() {
             "Поликлиника №40"
         )
 
-        val talonAdapter = ArrayAdapter(
+        val polyclinicAdapter = ArrayAdapter(
             this,
             android.R.layout.simple_spinner_item,
             polyclinics
         )
-        talonAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.polyclinicSpinner.adapter = talonAdapter
+        polyclinicAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.polyclinicSpinner.adapter = polyclinicAdapter
 
         binding.polyclinicSpinner.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
@@ -132,6 +132,13 @@ class ProfileActivity : AppCompatActivity() {
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
             }
+        val userPolyclinic = homeViewModel.selectedPolyclinic.value
+        val defaultIndex = polyclinics.indexOf(userPolyclinic)
+
+        if (defaultIndex != -1) {
+            binding.polyclinicSpinner.setSelection(defaultIndex)
+        }
+
 
 
 
